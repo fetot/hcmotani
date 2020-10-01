@@ -3,10 +3,52 @@
 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Tambah Data</h1>
+
+                        <tr>
+      <th scope="row">ID Karyawan</th>
+      <td>
+        <form method="GET" action="" >
+          <div class="input-group">
+          <input type="text" id="inputID" name="inputID" class="form-control form-control-sm mb-1" placeholder="ID Karyawan" autocomplete="off" required autofocus>
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-primary mb-1" name="Cari" id="btnCari" type="submit" ><i class="fas fa-search fa-fw mr-1"></i></button>
+            </div>
+          </div>
+        </form>
+      </td>
+    </tr>
+
+    <?php
+      if(isset($_GET['Cari'])) {
+        $keyword = $_GET['inputID'];
+        $sqlcari = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_infokaryawan.id_karyawan = tbl_masterkaryawan.id_karyawan LIKE '%$keyword%'");
+        $hasilcari = $sqlcari -> fetch_assoc();
+      }
+
+      else {
+        }
+    ?>
+
+    <?php if(empty($hasilcari)): ?>
+    <?php else: ?>
+    <tr>
+      <th scope="row">Nama Lengkap</th>
+      <td>
+        <input type="text" name="inputNama" class="form-control form-control-sm mb-1" placeholder="Nama Lengkap" value="<?php echo $hasilcari['nama']; ?>" required autofocus disabled>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Bagian</th>
+      <td>
+        <input type="text" name="inputBagian" class="form-control form-control-sm mb-1" placeholder="Bagian" value="<?php echo $hasilcari['bagian']; ?>" required autofocus disabled>
+      </td>
+    </tr>
+    <?php endif ?>
+<a href="tambahsp.php">Reset</a>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-user mr-1"></i>
-                                Karyawan Harlep
+                                Surat Peringatan
                             </div>
                             <div class="card-body">
 
@@ -20,107 +62,44 @@
 <table class="table table-sm table-borderless p-2">
   <tbody style="font-size: 0.9rem">
     <form method="post" action="tambahkaryawan.php" name="form1">
-    <tr>
-      <th scope="row">Nama Lengkap</th>
-      <td>
-        <input type="text" id="inputNama" name="inputNama" class="form-control form-control-sm mb-1" placeholder="Nama Lengkap" required autofocus>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Bagian</th>
-      <td>
-        <input type="text" id="inputBagian" name="inputBagian" class="form-control form-control-sm mb-1" placeholder="Bagian" required autofocus>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Badge</th>
-      <td>
-        <input type="text" id="inputBadge" name="inputBadge" class="form-control form-control-sm mb-1" placeholder="Badge" required autofocus>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Tanggal Masuk Bekerja</th>
-      <td>
-        <input type="date" id="inputTglMskKerja" name="inputTglMskKerja" class="form-control form-control-sm mb-1" required value="<?php echo date("Y-m-d"); ?>">
-      </td>
-    </tr>
     
+
     <tr>
         <th scope="row" colspan="3"><hr></th>
     </tr>
 
     <tr>
-      <th scope="row">NIK</th>
+      <th scope="row">Tanggal Diberikan SP</th>
       <td>
-        <input type="text" id="inputNIK" name="inputNIK" class="form-control form-control-sm mb-1" placeholder="NIK" autofocus>
+        <input type="date" id="inputTglSP" name="inputTglSP" class="form-control form-control-sm mb-1" required value="<?php echo date("Y-m-d"); ?>">
       </td>
     </tr>
+
     <tr>
-      <th scope="row">Jenis Kelamin</th>
-      <td>
-        <div class="form-check form-check-inline mb-1">
-            <input class="for1m-check-input mr-1" type="radio" name="jeniskelamin" id="inlineRadio1" value="Pria" required>
-            <label class="form-check-label" for="inlineRadio1">Pria</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="jeniskelamin" id="inlineRadio2" value="Wanita" required>
-            <label class="form-check-label" for="inlineRadio2">Wanita</label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Tempat, Tanggal Lahir</th>
-      <td>
-        <input type="text" id="inputTtl" name="inputTtl" class="form-control form-control-sm mb-1" placeholder="Tempat, Tanggal Lahir" required autofocus>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Nomor Ponsel</th>
-      <td>
-        <input type="tel" id="inputHP" name="inputHP" class="form-control form-control-sm mb-1" placeholder="Nomor Ponsel" required autofocus>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Alamat</th>
-      <td>
-        <textarea id="inputAlamat" name="inputAlamat" class="form-control form-control-sm mb-1" placeholder="Alamat Lengkap" row="3" required autofocus></textarea>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Agama</th>
-      <td>
-        <select id="inputAgama" name="inputAgama" class="form-control form-control-sm mb-1" required autofocus>
-        <option value="Islam">Islam</option>
-            <option value="Kristen">Kristen</option>
-            <option value="Katolik">Katolik</option>
-            <option value="Buddha">Buddha</option>
-            <option value="Hindu">Hindu</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Status Pernikahan</th>
+      <th scope="row">Jenis SP</th>
       <td>
       <div class="form-check form-check-inline mb-1">
-            <input class="for1m-check-input mr-1" type="radio" name="statusnikah" id="sttsnikah1" value="Lajang" required>
-            <label class="form-check-label" for="sttsnikah1">Lajang</label>
+            <input class="for1m-check-input mr-1" type="radio" name="jenissp" id="jenissp1" value="I" required>
+            <label class="form-check-label" for="jenissp1">I</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="statusnikah" id="sttsnikah2" value="Menikah" required>
-            <label class="form-check-label" for="sttsnikah2">Menikah</label>
+            <input class="form-check-input mr-1" type="radio" name="jenissp" id="jenissp2" value="II" required>
+            <label class="form-check-label" for="jenissp2">II</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="statusnikah" id="sttsnikah3" value="Menikah" required>
-            <label class="form-check-label" for="sttsnikah3">Janda</label>
+            <input class="form-check-input mr-1" type="radio" name="jenissp" id="jenissp3" value="III" required>
+            <label class="form-check-label" for="jenissp3">III</label>
         </div>
       </td>
     </tr>
+
     <tr>
-      <th scope="row">Pendidikan Terakhir</th>
+      <th scope="row">Keterangan</th>
       <td>
-        <input type="text" id="inputPendidikan" name="inputPendidikan" class="form-control form-control-sm" placeholder="Pendidikan Terakhir" required autofocus>
+        <textarea id="inputKet" name="inputKet" class="form-control form-control-sm mb-1" placeholder="Keterangan SP" row="3" required autofocus></textarea>
       </td>
     </tr>
+
     <tr>
         <th scope="row">
         </th>
@@ -178,8 +157,7 @@
             $query2 = mysqli_query($koneksi, "INSERT INTO tbl_infokaryawan(id_karyawan,nama,jenis_kelamin,ttl,alamat,agama,status_nikah,no_hp,pendidikan,nik) VALUES('$id','$nama','$jeniskelamin','$ttl','$alamat','$agama','$statusnikah','$nohp','$pendidikan','$nik')");
         
             if ($query2) {
-                echo "<script>alert('Karyawan berhasil ditambahkan!')</script>";
-                echo "<script>location='detail.php?id=$id'</script>";
+                echo "Karyawan berhasil ditambahkan.";
             } else {
                 var_dump($query2);
             }

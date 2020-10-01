@@ -30,9 +30,14 @@ $id = $_GET['id'];
   <tbody style="font-size: 0.9rem">
     <form method="post" action="detail.php?id=<?php echo "$id"; ?>" name="form1">
     <tr>
-      <th scope="row">ID</th>
+      <th scope="row">ID Karyawan</th>
       <td>
-        <input type="text" name="inputNama" class="form-control form-control-sm mb-1 border-0 bg-light" placeholder="Nama Lengkap" value="<?php echo $tabel['id_karyawan']; ?>" required autofocus disabled>
+        <div class="input-group">
+          <input type="text" id="idkaryawan" name="inputNama" class="form-control form-control-sm mb-1 border-0 bg-light" placeholder="Nama Lengkap" value="<?php echo $tabel['id_karyawan']; ?>" required autofocus readonly>
+          <div class="input-group-append">
+            <button class="btn btn-sm btn-primary mb-1" type="button" onclick="copy_text()"><i class="fas fa-clipboard fa-fw mr-1"></i>Copy</button>
+          </div>
+        </div>
       </td>
     </tr>
     <tr>
@@ -179,7 +184,8 @@ $id = $_GET['id'];
       $queryhapus2 = mysqli_query($koneksi, "DELETE FROM tbl_infokaryawan WHERE id=$id");
 
       if ($queryhapus2) {
-        echo "Data Karyawan berhasil dihapus.";
+        echo "<script>alert('Data Karyawan berhasil dihapus!')</script>";
+        echo "<script>location='index.php'</script>";
         
       } else {
           var_dump($queryhapus2);

@@ -72,9 +72,9 @@ include "koneksi.php";
                             <div class="collapse" id="tambahData" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="tambahkaryawan.php">Karyawan</a>
-                                    <a class="nav-link" href="datasp.php">SP</a>
-                                    <a class="nav-link" href="datacuti.php">Cuti</a>
-                                    <a class="nav-link" href="dataresign.php">Resign</a>
+                                    <a class="nav-link" href="tambahsp.php">SP</a>
+                                    <a class="nav-link" href="tambahcuti.php">Cuti</a>
+                                    <a class="nav-link" href="tambahresign.php">Resign</a>
                                 </nav>
                             </div>
                     </div>

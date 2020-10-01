@@ -25,5 +25,26 @@
                 $('#myInput').trigger('focus')
             })
         </script>
+        <script type="text/javascript">
+            // function copy_text() {
+            // document.getElementById("idkaryawan").select();
+            // document.execCommand("copy");
+            // alert("Text berhasil dicopy");
+            // }
+            function copy_text() {
+                /* Get the text field */
+                var copyText = document.getElementById("idkaryawan");
+
+                /* Select the text field */
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+                /* Copy the text inside the text field */
+                document.execCommand("copy");
+
+                /* Alert the copied text */
+                alert("ID Karyawan berhasil dicopy: " + copyText.value);
+            }
+        </script>
     </body>
 </html>

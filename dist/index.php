@@ -23,7 +23,7 @@
                                     <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="text-center">
                                             <tr>
-                                                <th>No</th>
+                                                <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Bagian</th>
                                                 <th>Badge</th>
@@ -36,7 +36,7 @@
                                         </thead>
                                         <tfoot class="text-center">
                                             <tr>
-                                                <th>No</th>
+                                                <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Bagian</th>
                                                 <th>Badge</th>
@@ -49,12 +49,11 @@
                                         </tfoot>
                                         <tbody>
                                             <?php 
-                                                $nomor = 1;
                                                 $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_infokaryawan.id_karyawan = tbl_masterkaryawan.id_karyawan");
                                                 while($tabel = $tampil -> fetch_assoc()){
                                             ?>
                                             <tr>
-                                                <td class="text-center"><?php echo $nomor; ?></td>
+                                                <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
                                                 <td><?php echo $tabel['nama']; ?></td>
                                                 <td class="text-center"><?php echo $tabel['bagian']; ?></td>
                                                 <td class="text-center"><?php echo $tabel['badge']; ?></td>
@@ -89,7 +88,7 @@
                                                                 Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan.
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="submit" name="Submit" id="btnTambah" class="btn btn-danger">Hapus</button>
+                                                                <a href="hapuskaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-danger">Hapus</a>
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                             </div>
                                                             </div>
@@ -98,7 +97,6 @@
                                                     <!-- end modal -->
                                                 </td>        
                                             </tr>
-                                                <?php $nomor++; ?>
                                                 <?php } ?>
                                         </tbody>
                                     </table>
