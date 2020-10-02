@@ -143,8 +143,10 @@ $id = $_GET['id'];
         <th scope="row">
         </th>
         <td>
-            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-primary mt-2 mr-2"><i class="fas fa-edit fa-fw mr-1"></i>Ubah</a>
-            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="btn btn-danger mt-2"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</a>
+            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-primary mt-2 mr-2"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+            <a href="tambahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="btn btn-warning mt-2 mr-2"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
+            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="btn btn-danger mt-2 mr-2"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
+            
         </td>
         <td></td>
     </tr>

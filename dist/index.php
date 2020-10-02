@@ -69,8 +69,9 @@
 
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                 <a class="dropdown-item text-primary" href="detail.php?id=<?php echo $tabel['id_karyawan']; ?>"><i class="fas fa-eye fa-fw mr-1"></i>Detil</a>
-                                                                <a class="dropdown-item text-primary" href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>"><i class="fas fa-edit fa-fw mr-1"></i>Ubah</a>
-                                                                <button class="dropdown-item text-danger" data-toggle="modal" data-target="#modalDelKonfirmasi"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
+                                                                <a class="dropdown-item text-primary" href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                                                                <a href="tambahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="dropdown-item text-warning"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
+                                                                <button class="dropdown-item text-danger" data-toggle="modal" data-target="#modalDelKonfirmasi"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</button>
                                                             </div>
                                                     </div>
 

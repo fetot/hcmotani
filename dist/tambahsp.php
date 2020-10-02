@@ -1,15 +1,38 @@
-<?php include "uiheader.php" ?>
+<?php 
+  include "uiheader.php";
+  if(empty($_GET['inputID'])){
+
+  }else{
+    $keyword = $_GET['inputID'];
+  }
+
+?>
 
 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Tambah Data</h1>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-user mr-1"></i>
+                                Surat Peringatan
+                            </div>
+                            <div class="card-body">
 
-                        <tr>
+                            
+                        <?php 
+                            // $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                            // $tabel = $tampil -> fetch_assoc();
+                        ?>
+
+
+<table class="table table-sm table-borderless p-2">
+  <tbody style="font-size: 0.9rem">
+  <tr>
       <th scope="row">ID Karyawan</th>
       <td>
         <form method="GET" action="" >
           <div class="input-group">
-          <input type="text" id="inputID" name="inputID" class="form-control form-control-sm mb-1" placeholder="ID Karyawan" autocomplete="off" required autofocus>
+          <input type="text" id="inputID" name="inputID" class="form-control form-control-sm mb-1" placeholder="ID Karyawan" value="<?php if(empty($_GET['inputID'])){echo "";}else{$inputID = $_GET['inputID']; echo $inputID;} ?>" autocomplete="off" required autofocus>
             <div class="input-group-append">
               <button class="btn btn-sm btn-primary mb-1" name="Cari" id="btnCari" type="submit" ><i class="fas fa-search fa-fw mr-1"></i></button>
             </div>
@@ -21,8 +44,12 @@
     <?php
       if(isset($_GET['Cari'])) {
         $keyword = $_GET['inputID'];
-        $sqlcari = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_infokaryawan.id_karyawan = tbl_masterkaryawan.id_karyawan LIKE '%$keyword%'");
+        $sqlcari = $koneksi -> query("SELECT * FROM tbl_infokaryawan WHERE tbl_infokaryawan.id_karyawan = $keyword");
         $hasilcari = $sqlcari -> fetch_assoc();
+        if($sqlcari){
+          $sqlcari2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan WHERE tbl_masterkaryawan.id_karyawan = $keyword");
+          $hasilcari2 = $sqlcari2 -> fetch_assoc();
+        }
       }
 
       else {
@@ -40,33 +67,17 @@
     <tr>
       <th scope="row">Bagian</th>
       <td>
-        <input type="text" name="inputBagian" class="form-control form-control-sm mb-1" placeholder="Bagian" value="<?php echo $hasilcari['bagian']; ?>" required autofocus disabled>
+        <input type="text" name="inputBagian" class="form-control form-control-sm mb-1" placeholder="Bagian" value="<?php echo $hasilcari2['bagian']; ?>" required autofocus disabled>
       </td>
     </tr>
     <?php endif ?>
-<a href="tambahsp.php">Reset</a>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-user mr-1"></i>
-                                Surat Peringatan
-                            </div>
-                            <div class="card-body">
-
-                            
-                        <?php 
-                            // $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
-                            // $tabel = $tampil -> fetch_assoc();
-                        ?>
-
-
-<table class="table table-sm table-borderless p-2">
-  <tbody style="font-size: 0.9rem">
-    <form method="post" action="tambahkaryawan.php" name="form1">
-    
+<!-- <a href="tambahsp.php">Reset</a> -->
 
     <tr>
         <th scope="row" colspan="3"><hr></th>
     </tr>
+
+    <form method="post" action="tambahsp.php" name="form1">
 
     <tr>
       <th scope="row">Tanggal Diberikan SP</th>
@@ -134,7 +145,7 @@
 
 <?php
     if(isset($_POST['Submit'])){
-        $nama = $_POST['inputNama'];
+        $id = $_POST['inputNama'];
         $bagian = $_POST['inputBagian'];
         $badge = $_POST['inputBadge'];
         $tglmskkerja = $_POST['inputTglMskKerja'];
