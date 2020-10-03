@@ -21,46 +21,45 @@ include "uiheader.php";
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th>No</th>
+                                                <th>ID Karyawan</th>
                                                 <th>Nama</th>
                                                 <th>Bagian</th>
-                                                <th>Badge</th>
-                                                <th>Tanggal Masuk Kerja</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
+                                                <th>SP</th>
+                                                <th>Tanggal Diberikan SP</th>
+                                                <th>Keterangan</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th>No</th>
+                                                <th>ID Karyawan</th>
                                                 <th>Nama</th>
                                                 <th>Bagian</th>
-                                                <th>Badge</th>
-                                                <th>Tanggal Masuk Kerja</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
+                                                <th>SP</th>
+                                                <th>Tanggal Diberikan SP</th>
+                                                <th>Keterangan</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <?php 
                                                 $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_infokaryawan.id_karyawan = tbl_masterkaryawan.id_karyawan");
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_sp, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_sp.id_karyawan AND tbl_infokaryawan.id_karyawan = tbl_sp.id_karyawan ORDER BY tbl_sp.no");
                                                 while($tabel = $tampil -> fetch_assoc()){
+                                                    
                                             ?>
                                             <tr>
-                                                <td><?php echo $nomor; ?></td>
+                                                <td class="text-center"><?php echo $nomor; ?></td>
+                                                <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
                                                 <td><?php echo $tabel['nama']; ?></td>
-                                                <td><?php echo $tabel['bagian']; ?></td>
-                                                <td><?php echo $tabel['badge']; ?></td>
-                                                <td><?php echo date("d-M-Y", strtotime($tabel['tgl_masukkerja'])); ?></td>
-                                                <td><?php echo $tabel['status']; ?></td>
-                                                <td>
-                                                    <a href="detail.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-primary">Detil</a>
-                                                </td>
+                                                <td class="text-center"><?php echo $tabel['bagian']; ?></td>
+                                                <td class="text-center"><?php echo $tabel['jenissp']; ?></td>
+                                                <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_sp'])); ?></td>
+                                                <td><?php echo $tabel['keterangan']; ?></td>
                                             </tr>
                                                 <?php $nomor++; ?>
-                                                <?php } ?>
+                                                <?php }  ?>
                                         </tbody>
                                     </table>
                                 </div>

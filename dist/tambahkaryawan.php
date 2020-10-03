@@ -3,9 +3,16 @@
 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Tambah Data</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
+                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tambah Data Karyawan</li>
+                            </ol>
+                        </nav>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-user mr-1"></i>
+                                <i class="fas fa-user-plus mr-1"></i>
                                 Karyawan Harlep
                             </div>
                             <div class="card-body">

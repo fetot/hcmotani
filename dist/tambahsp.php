@@ -1,7 +1,7 @@
 <?php 
   include "uiheader.php";
   if(empty($_GET['inputID'])){
-
+    $keyword = "";
   }else{
     $keyword = $_GET['inputID'];
   }
@@ -11,6 +11,20 @@
 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Tambah Data</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <?php if(empty($keyword)){
+                                  echo "";
+                                }else{
+                                  echo "
+                                  <li class='breadcrumb-item'><a href='index.php'>Tampil Data Karyawan</a></li>
+                                  <li class='breadcrumb-item'><a href='detail.php?id=$keyword'>Info Karyawan</a></li>
+                                  ";
+                                } ?>
+                                <li class="breadcrumb-item active" aria-current="page">Tambah Data SP</li>
+                            </ol>
+                        </nav>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-user mr-1"></i>
@@ -51,9 +65,6 @@
           $hasilcari2 = $sqlcari2 -> fetch_assoc();
         }
       }
-
-      else {
-        }
     ?>
 
     <?php if(empty($hasilcari)): ?>
@@ -114,14 +125,14 @@
     <tr>
         <th scope="row">
         </th>
-        <td><button class="btn btn-primary mt-3" type="button" data-toggle="modal" data-target="#modalKonfirmasi">Tambah</button></td>
+        <td><button class="btn btn-warning mt-3" type="button" data-toggle="modal" data-target="#modalKonfirmasi"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</button></td>
         <td></td>
 
     <div class="modal fade" id="modalKonfirmasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-circle fa-fw mr-1 text-warning"></i>Konfirmasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -145,38 +156,19 @@
 
 <?php
     if(isset($_POST['Submit'])){
-        $id = $_POST['inputNama'];
-        $bagian = $_POST['inputBagian'];
-        $badge = $_POST['inputBadge'];
-        $tglmskkerja = $_POST['inputTglMskKerja'];
-        $nik = $_POST['inputNIK'];
-        $jeniskelamin = $_POST['jeniskelamin'];
-        $ttl = $_POST['inputTtl'];
-        $nohp = $_POST['inputHP'];
-        $alamat = $_POST['inputAlamat'];
-        $agama = $_POST['inputAgama'];
-        $statusnikah = $_POST['statusnikah'];
-        $pendidikan = $_POST['inputPendidikan'];
+        $idkaryawan = $keyword;
+        $tglsp = $_POST['inputTglSP'];
+        $jenissp = $_POST['jenissp'];
+        $ket = $_POST['inputKet'];
+        $waktudibuat = date("Y-m-d h:i:s");
+        $terakhirdiubah = date("Y-m-d h:i:s");
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_masterkaryawan (tgl_masukkerja,bagian,badge,status) VALUES ('$tglmskkerja','$bagian','$badge','Aktif')");
-        if ($query1) {
-            $last_id = mysqli_query($koneksi, "SELECT id_karyawan FROM tbl_masterkaryawan ORDER BY id_karyawan DESC");
-            $row_last = $last_id->fetch_assoc();
-            $id = $row_last['id_karyawan'];
-            $query2 = mysqli_query($koneksi, "INSERT INTO tbl_infokaryawan(id_karyawan,nama,jenis_kelamin,ttl,alamat,agama,status_nikah,no_hp,pendidikan,nik) VALUES('$id','$nama','$jeniskelamin','$ttl','$alamat','$agama','$statusnikah','$nohp','$pendidikan','$nik')");
-        
-            if ($query2) {
-                echo "Karyawan berhasil ditambahkan.";
-            } else {
-                var_dump($query2);
-            }
-        } else {
-            var_dump($badge);
-            var_dump($query1);echo "query1";
-        }
-        
+        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$keyword','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+
+        echo "<script>alert('SP berhasil ditambahkan!')</script>";
+        echo "<script>location='datasp.php'</script>";
     }
 ?>
 

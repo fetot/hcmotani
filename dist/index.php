@@ -15,7 +15,7 @@
 
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
+                                <i class="fas fa-users mr-1"></i>
                                 Data Karyawan Harlep
                             </div>
                             <div class="card-body">

@@ -6,9 +6,23 @@
 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Ubah Data</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <?php if(empty($_GET['id'])){
+                                  echo '<li class="breadcrumb-item"><a href="index.php">Tampil Data Karyawan</a></li>';
+                                }else{
+                                  echo "
+                                  <li class='breadcrumb-item'><a href='index.php'>Tampil Data Karyawan</a></li>
+                                  <li class='breadcrumb-item'><a href='detail.php?id=$id'>Info Karyawan</a></li>
+                                  ";
+                                } ?>
+                                <li class="breadcrumb-item active" aria-current="page">Ubah Data Karyawan</li>
+                            </ol>
+                        </nav>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-user mr-1"></i>
+                                <i class="fas fa-user-edit mr-1"></i>
                                 Karyawan Harlep
                             </div>
                             <div class="card-body">

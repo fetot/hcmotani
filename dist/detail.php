@@ -8,14 +8,14 @@ $id = $_GET['id'];
                         <h1 class="mt-4">Info Karyawan</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
                                 <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="index.php">Tampil Data Karyawan</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Info Karyawan</li>
                             </ol>
                         </nav>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-users mr-1"></i>
+                                <i class="fas fa-user-check mr-1"></i>
                                 Info Karyawan
                             </div>
                             <div class="card-body">
