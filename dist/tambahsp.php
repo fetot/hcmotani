@@ -14,14 +14,6 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                                <?php if(empty($keyword)){
-                                  echo "";
-                                }else{
-                                  echo "
-                                  <li class='breadcrumb-item'><a href='index.php'>Tampil Data Karyawan</a></li>
-                                  <li class='breadcrumb-item'><a href='detail.php?id=$keyword'>Info Karyawan</a></li>
-                                  ";
-                                } ?>
                                 <li class="breadcrumb-item active" aria-current="page">Tambah Data SP</li>
                             </ol>
                         </nav>
@@ -89,7 +81,7 @@
     </tr>
 
     <form method="post" action="tambahsp.php" name="form1">
-
+    <input type="hidden" name="aidi" value="<?php echo $keyword; ?>" readonly="true" autocomplete="off" required="">
     <tr>
       <th scope="row">Tanggal Diberikan SP</th>
       <td>
@@ -156,16 +148,15 @@
 
 <?php
     if(isset($_POST['Submit'])){
-        $idkaryawan = $keyword;
+        $idkaryawan = $_POST['aidi'];
         $tglsp = $_POST['inputTglSP'];
         $jenissp = $_POST['jenissp'];
         $ket = $_POST['inputKet'];
-        $waktudibuat = date("Y-m-d h:i:s");
-        $terakhirdiubah = date("Y-m-d h:i:s");
+        
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$keyword','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
 
         echo "<script>alert('SP berhasil ditambahkan!')</script>";
         echo "<script>location='datasp.php'</script>";

@@ -182,7 +182,7 @@
             $last_id = mysqli_query($koneksi, "SELECT id_karyawan FROM tbl_masterkaryawan ORDER BY id_karyawan DESC");
             $row_last = $last_id->fetch_assoc();
             $id = $row_last['id_karyawan'];
-            $query2 = mysqli_query($koneksi, "INSERT INTO tbl_infokaryawan(id_karyawan,nama,jenis_kelamin,ttl,alamat,agama,status_nikah,no_hp,pendidikan,nik) VALUES('$id','$nama','$jeniskelamin','$ttl','$alamat','$agama','$statusnikah','$nohp','$pendidikan','$nik')");
+            $query2 = mysqli_query($koneksi, "INSERT INTO tbl_infokaryawan(id_karyawan,nama,jenis_kelamin,ttl,alamat,agama,status_nikah,no_hp,pendidikan,nik,waktudibuat,terakhirdiubah) VALUES('$id','$nama','$jeniskelamin','$ttl','$alamat','$agama','$statusnikah','$nohp','$pendidikan','$nik',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
         
             if ($query2) {
                 echo "<script>alert('Karyawan berhasil ditambahkan!')</script>";

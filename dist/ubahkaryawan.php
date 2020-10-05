@@ -163,7 +163,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-circle fa-fw mr-1 text-warning"></i>Konfirmasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -205,10 +205,11 @@
     
         $query1 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET tgl_masukkerja='$tglmskkerja',bagian='$bagian',badge='$badge',status='$status' WHERE id_karyawan=$id");
         if ($query1) {
-            $query2 = mysqli_query($koneksi, "UPDATE tbl_infokaryawan SET id_karyawan='$id',nama='$nama',jenis_kelamin='$jeniskelamin',ttl='$ttl',alamat='$alamat',agama='$agama',status_nikah='$statusnikah',no_hp='$nohp',pendidikan='$pendidikan',nik='$nik' WHERE id=$id");
+            $query2 = mysqli_query($koneksi, "UPDATE tbl_infokaryawan SET id_karyawan='$id',nama='$nama',jenis_kelamin='$jeniskelamin',ttl='$ttl',alamat='$alamat',agama='$agama',status_nikah='$statusnikah',no_hp='$nohp',pendidikan='$pendidikan',nik='$nik',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id=$id");
         
             if ($query2) {
-                echo "Data Karyawan berhasil diubah.";
+              echo "<script>alert('Data Karyawan berhasil diubah!')</script>";
+              echo "<script>location='detail.php?id=$id'</script>";
                 
             } else {
                 var_dump($query2);
