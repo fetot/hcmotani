@@ -21,6 +21,12 @@ include "koneksi.php";
         <link rel="stylesheet" href="bootstrap/font/css/fontawesome-all.min.css">
     </head>
     <body class="sb-nav-fixed">
+        <?php 
+        session_start();
+        if($_SESSION['status']!="login"){
+            header("location:login.php?pesan=belum_login");
+        }
+        ?>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.php">HCM Otani</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -32,7 +38,7 @@ include "koneksi.php";
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Pengaturan</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Keluar</a>
+                        <a class="dropdown-item" href="logout.php">Keluar</a>
                     </div>
                 </li>
             </ul>
@@ -44,7 +50,7 @@ include "koneksi.php";
                         <div class="nav">
                             <div class="sb-sidenav-footer">
                                 <div class="small">Masuk sebagai:</div>
-                                Admin
+                                <?php echo ucfirst($_SESSION['username']); ?>
                             </div>
                             <div class="sb-sidenav-menu-heading">Menu</div>
                             <a class ="nav-link" href="index.php">
