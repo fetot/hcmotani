@@ -50,7 +50,7 @@ include "koneksi.php";
                         <div class="nav">
                             <div class="sb-sidenav-footer">
                                 <div class="small">Masuk sebagai:</div>
-                                <?php echo ucfirst($_SESSION['username']); ?>
+                                <?php echo strtoupper($_SESSION['username']); ?>
                             </div>
                             <div class="sb-sidenav-menu-heading">Menu</div>
                             <a class ="nav-link" href="index.php">

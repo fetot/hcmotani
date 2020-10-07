@@ -35,7 +35,7 @@ $id = $_GET['id'];
         <div class="input-group">
           <input type="text" id="idkaryawan" name="inputNama" class="form-control form-control-sm mb-1 border-0 bg-light" placeholder="Nama Lengkap" value="<?php echo $tabel['id_karyawan']; ?>" required autofocus readonly>
           <div class="input-group-append">
-            <button class="btn btn-sm btn-primary mb-1" type="button" onclick="copy_text()"><i class="fas fa-clipboard fa-fw mr-1"></i>Copy</button>
+            <button class="btn btn-sm btn-primary mb-1" data-toggle="tooltip" data-placement="top" title="Salin ID" type="button" onclick="copy_text()"><i class="fas fa-clipboard fa-fw mr-1"></i>Salin</button>
           </div>
         </div>
       </td>
@@ -139,16 +139,53 @@ $id = $_GET['id'];
         <input type="text" name="inputPendidikan" class="form-control form-control-sm" placeholder="Pendidikan Terakhir" value="<?php echo $tabel['pendidikan']; ?>" required autofocus disabled>
       </td>
     </tr>
+
     <tr>
-        <th scope="row">
-        </th>
-        <td>
-            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-primary mt-2 mr-2"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+        <th scope="row" colspan="3"><hr></th>
+    </tr>
+
+    <tr>
+        <td scope="row" colspan="2">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Riwayat SP
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Riwayat Cuti
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+        </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td scope="row" colspan="2">
+        <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-primary mt-2 mr-2"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
             <a href="tambahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="btn btn-warning mt-2 mr-2"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
             <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="btn btn-danger mt-2 mr-2"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
-            
         </td>
-        <td></td>
     </tr>
 
     <!-- modal delete -->

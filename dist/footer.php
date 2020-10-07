@@ -17,12 +17,22 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
          <!-- Optional JavaScript -->
+         <script>
+               setTimeout(function() {
+                    window.location.href="logout.php";   
+                    alert('Anda terlalu lama diam. Silahkan login kembali!')             
+                }, 600000);
+        </script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js">
             $('#myModal').on('shown.bs.modal', function () {
                 $('#myInput').trigger('focus')
+            })
+
+            $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
             })
         </script>
         <script type="text/javascript">
