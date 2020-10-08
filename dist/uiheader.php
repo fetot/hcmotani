@@ -24,7 +24,7 @@ include "koneksi.php";
         <?php 
         session_start();
         if($_SESSION['status']!="login"){
-            header("location:401");
+            header("location:../401");
         }
         ?>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

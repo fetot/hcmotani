@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <meta http-equiv="refresh" content="0;url=dist/index">
+    <meta http-equiv="refresh" content="0;url=dist/login">
     <title>SI HCM Otani</title>
     <script language="javascript">
-        window.location.href = "dist/index"
+        window.location.href = "dist/login"
     </script>
 </head>
 <body>
-    Ke <a href="dist/index">Dashboard</a>
+    <a href="dist/login"></a>
 </body>
 </html>

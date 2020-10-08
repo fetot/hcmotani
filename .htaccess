@@ -1,10 +1,10 @@
+ErrorDocument 404 /404.php
+ErrorDocument 401 /401.php
+ErrorDocument 500 /500.php
+
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
 </IfModule>
-
-ErrorDocument 404 /dist/404.php
-ErrorDocument 401 /dist/401.php
-ErrorDocument 500 /dist/500.php

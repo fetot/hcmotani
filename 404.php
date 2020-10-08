@@ -7,13 +7,13 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>404 Error - HCM Otani</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="dist/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body>
     <script>
         setTimeout(function () {
-        window.location.href= 'index'; // the redirect goes here
+        window.location.href= 'dist/index'; // the redirect goes here
 
         },3500); //duration
     </script>
@@ -26,7 +26,7 @@
                                 <div class="text-center mt-4">
                                     <img class="mb-4 img-error" src="assets/img/error-404-monochrome.svg" />
                                     <p class="lead">Alamat yang anda tuju tidak ditemukan.</p>
-                                    <a href="index.php">
+                                    <a href="dist/index">
                                         <i class="fas fa-arrow-left mr-1"></i>
                                         Return to Dashboard
                                     </a>
@@ -48,6 +48,6 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="dist/js/scripts.js"></script>
     </body>
 </html>

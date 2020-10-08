@@ -36,11 +36,6 @@
             })
         </script>
         <script type="text/javascript">
-            // function copy_text() {
-            // document.getElementById("idkaryawan").select();
-            // document.execCommand("copy");
-            // alert("Text berhasil dicopy");
-            // }
             function copy_text() {
                 /* Get the text field */
                 var copyText = document.getElementById("idkaryawan");

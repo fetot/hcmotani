@@ -18,7 +18,7 @@
                                     <a href="#" class="dropdown-item text-danger"><i class="fas fa-file-pdf fa-fw mr-1"></i>PDF (.pdf)</a>
                                 </div>
                             </div>
-                            <a href="#" target="_BLANK" onClick="window.print();" class="btn btn-outline-secondary"><i class="fas fa-print fa-fw mr-1"></i>Cetak</a>
+                            <a href="cetak/cetakdatakaryawan" target="_blank" class="btn btn-outline-secondary"><i class="fas fa-print fa-fw mr-1"></i>Cetak</a>
                           </div>
                           
                         </div>
