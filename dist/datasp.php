@@ -8,7 +8,7 @@ include "uiheader.php";
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
-                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tampil Data SP</li>
                             </ol>
                         </nav>
@@ -66,7 +66,7 @@ include "uiheader.php";
                                                         </a>
 
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                <a class="dropdown-item text-primary" href="ubahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                                                                <a class="dropdown-item text-primary" href="ubahsp?inputID=<?php echo $tabel['id_karyawan']; ?>"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                                                 <button class="dropdown-item text-danger" data-toggle="modal" data-target="#modalDelKonfirmasi"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus SP</button>
                                                             </div>
                                                     </div>
@@ -85,7 +85,7 @@ include "uiheader.php";
                                                                 Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan.
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a href="hapussp.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-danger">Hapus</a>
+                                                                <a href="hapussp?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-danger">Hapus</a>
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                             </div>
                                                             </div>

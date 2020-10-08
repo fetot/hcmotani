@@ -6,7 +6,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
-                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tambah Data Karyawan</li>
                             </ol>
                         </nav>
@@ -26,7 +26,7 @@
 
 <table class="table table-sm table-borderless p-2">
   <tbody style="font-size: 0.9rem">
-    <form method="post" action="tambahkaryawan.php" name="form1">
+    <form method="post" action="tambahkaryawan" name="form1">
     <tr>
       <th scope="row">Nama Lengkap</th>
       <td>
@@ -186,7 +186,7 @@
         
             if ($query2) {
                 echo "<script>alert('Karyawan berhasil ditambahkan!')</script>";
-                echo "<script>location='detail.php?id=$id'</script>";
+                echo "<script>location='detail?id=$id'</script>";
             } else {
                 var_dump($query2);
             }

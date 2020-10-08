@@ -13,7 +13,7 @@
                         <h1 class="mt-4">Tambah Data</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tambah Data SP</li>
                             </ol>
                         </nav>
@@ -74,13 +74,12 @@
       </td>
     </tr>
     <?php endif ?>
-<!-- <a href="tambahsp.php">Reset</a> -->
 
     <tr>
         <th scope="row" colspan="3"><hr></th>
     </tr>
 
-    <form method="post" action="tambahsp.php" name="form1">
+    <form method="post" action="tambahsp" name="form1">
     <input type="hidden" name="aidi" value="<?php echo $keyword; ?>" readonly="true" autocomplete="off" required="">
     <tr>
       <th scope="row">Tanggal Diberikan SP</th>
@@ -159,7 +158,7 @@
         $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
 
         echo "<script>alert('SP berhasil ditambahkan!')</script>";
-        echo "<script>location='datasp.php'</script>";
+        echo "<script>location='datasp'</script>";
     }
 ?>
 

@@ -24,11 +24,11 @@ include "koneksi.php";
         <?php 
         session_start();
         if($_SESSION['status']!="login"){
-            header("location:login.php?pesan=belum_login");
+            header("location:401");
         }
         ?>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">HCM Otani</a>
+            <a class="navbar-brand" href="index">HCM Otani</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
             <!-- Navbar-->
@@ -38,7 +38,7 @@ include "koneksi.php";
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Pengaturan</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout.php">Keluar</a>
+                        <a class="dropdown-item" href="logout">Keluar</a>
                     </div>
                 </li>
             </ul>
@@ -53,7 +53,7 @@ include "koneksi.php";
                                 <?php echo strtoupper($_SESSION['username']); ?>
                             </div>
                             <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class ="nav-link" href="index.php">
+                            <a class ="nav-link" href="index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home fa-fw"></i></div>
                                 Dashboard
                             </a>
@@ -64,10 +64,10 @@ include "koneksi.php";
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="index.php">Karyawan</a>
-                                    <a class="nav-link" href="datasp.php">SP</a>
-                                    <a class="nav-link" href="datacuti.php">Cuti</a>
-                                    <a class="nav-link" href="dataresign.php">Resign</a>
+                                    <a class="nav-link" href="index">Karyawan</a>
+                                    <a class="nav-link" href="datasp">SP</a>
+                                    <a class="nav-link" href="datacuti">Cuti</a>
+                                    <a class="nav-link" href="dataresign">Resign</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tambahData" aria-expanded="false" aria-controls="collapseLayouts">
@@ -77,10 +77,10 @@ include "koneksi.php";
                             </a>
                             <div class="collapse" id="tambahData" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="tambahkaryawan.php">Karyawan</a>
-                                    <a class="nav-link" href="tambahsp.php">SP</a>
-                                    <a class="nav-link" href="tambahcuti.php">Cuti</a>
-                                    <a class="nav-link" href="tambahresign.php">Resign</a>
+                                    <a class="nav-link" href="tambahkaryawan">Karyawan</a>
+                                    <a class="nav-link" href="tambahsp">SP</a>
+                                    <a class="nav-link" href="tambahcuti">Cuti</a>
+                                    <a class="nav-link" href="tambahresign">Resign</a>
                                 </nav>
                             </div>
                     </div>

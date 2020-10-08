@@ -13,8 +13,8 @@
                         <h1 class="mt-4">Ubah Data</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="datasp.php">Tampil Data SP</a></li>
+                                <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="datasp">Tampil Data SP</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Ubah Data SP</li>
                             </ol>
                         </nav>
@@ -35,7 +35,7 @@
 
 
 <table class="table table-sm table-borderless p-2">
-<form method="post" action="ubahsp.php?inputID=<?php echo $keyword; ?>" name="form1">
+<form method="post" action="ubahsp?inputID=<?php echo $keyword; ?>" name="form1">
   <tbody style="font-size: 0.9rem">
   
   <tr>
@@ -138,7 +138,7 @@
 
         if($query1){
             echo "<script>alert('Data SP berhasil diubah!')</script>";
-            echo "<script>location='datasp.php'</script>";
+            echo "<script>location='datasp'</script>";
         }
     }
 ?>

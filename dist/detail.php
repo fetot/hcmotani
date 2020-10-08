@@ -4,35 +4,41 @@ $id = $_GET['id'];
 ?>
 
                 <main>
-                    <div class="container-fluid">
-                        <h1 class="mt-4">Info Karyawan</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="index.php">Tampil Data Karyawan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Info Karyawan</li>
-                            </ol>
-                        </nav>
-
+                
                         <?php 
                             $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
                             $tabel = $tampil -> fetch_assoc();
                         ?>
 
-                        <div class="">
-                        </div>
+                    <div class="container-fluid">
+                      <div class="row mt-4 align-items-center">
+                        <h1 class="col-md-3">Info Karyawan</h1>
+                        <div class="btn-toolbar col-md-3 offset-md-6 justify-content-end">
+                          <div class="dropdown">
+                              <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-wrench fa-fw mr-1"></i>Opsi
+                              </a>
 
-                        <div class="dropdown show">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fas fa-wrench fa-fw mr-1"></i>Opsi
-                            </a>
-
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="dropdown-item text-primary"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                            <a href="tambahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="dropdown-item text-warning"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
-                            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <a href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>" class="dropdown-item text-primary"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                              <a href="tambahsp?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="dropdown-item text-warning"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
+                              <a href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
+                            </div>
                           </div>
+                          <div class="btn-group ml-2">
+                            <button class="btn btn-outline-secondary"><i class="fas fa-print fa-fw mr-1"></i>Cetak</button>
+                          </div>
+                          
                         </div>
+                      </div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="index">Tampil Data Karyawan</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Info Karyawan</li>
+                            </ol>
+                        </nav>
+
 
                         <div class="card mb-4 mt-3">
                             <div class="card-header">
@@ -46,7 +52,7 @@ $id = $_GET['id'];
 
 <table class="table table-sm table-borderless p-2">
   <tbody style="font-size: 0.9rem">
-    <form method="post" action="detail.php?id=<?php echo "$id"; ?>" name="form1">
+    <form method="post" action="detail?id=<?php echo "$id"; ?>" name="form1">
     <tr>
       <th scope="row">ID Karyawan</th>
       <td>
@@ -240,7 +246,7 @@ $id = $_GET['id'];
 
       if ($queryhapus2) {
         echo "<script>alert('Data Karyawan berhasil dihapus!')</script>";
-        echo "<script>location='index.php'</script>";
+        echo "<script>location='index'</script>";
         
       } else {
           var_dump($queryhapus2);

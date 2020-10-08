@@ -2,15 +2,13 @@
 <html>
 
 <head>
-    <meta http-equiv="refresh" content="0;url=dist/login.php">
+    <meta http-equiv="refresh" content="0;url=dist/index">
     <title>SI HCM Otani</title>
     <script language="javascript">
-        window.location.href = "dist/login.php"
+        window.location.href = "dist/index"
     </script>
 </head>
-
 <body>
-    Go to <a href="dist/login.php">/dist/login.php</a>
+    Ke <a href="dist/index">Dashboard</a>
 </body>
-
 </html>

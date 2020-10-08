@@ -8,13 +8,13 @@
                         <h1 class="mt-4">Ubah Data</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                                 <?php if(empty($_GET['id'])){
-                                  echo '<li class="breadcrumb-item"><a href="index.php">Tampil Data Karyawan</a></li>';
+                                  echo '<li class="breadcrumb-item"><a href="index">Tampil Data Karyawan</a></li>';
                                 }else{
                                   echo "
-                                  <li class='breadcrumb-item'><a href='index.php'>Tampil Data Karyawan</a></li>
-                                  <li class='breadcrumb-item'><a href='detail.php?id=$id'>Info Karyawan</a></li>
+                                  <li class='breadcrumb-item'><a href='index'>Tampil Data Karyawan</a></li>
+                                  <li class='breadcrumb-item'><a href='detail?id=$id'>Info Karyawan</a></li>
                                   ";
                                 } ?>
                                 <li class="breadcrumb-item active" aria-current="page">Ubah Data Karyawan</li>
@@ -36,7 +36,7 @@
 
 <table class="table table-sm table-borderless p-2">
   <tbody style="font-size: 0.9rem">
-    <form method="post" action="ubahkaryawan.php?id=<?php echo "$id"; ?>" name="form1">
+    <form method="post" action="ubahkaryawan?id=<?php echo "$id"; ?>" name="form1">
     <tr>
       <th scope="row">Nama Lengkap</th>
       <td>
@@ -154,7 +154,7 @@
         <th scope="row">
         </th>
         <td>
-          <a class="btn btn-outline-secondary mt-3" type="button" href="detail.php?id=<?php echo $id ?>">Batal</a>
+          <a class="btn btn-outline-secondary mt-3" type="button" href="detail?id=<?php echo $id ?>">Batal</a>
           <button class="btn btn-primary mt-3 ml-2" type="button" data-toggle="modal" data-target="#modalKonfirmasi">Ubah</button>
         </td>
         <td></td>
@@ -209,7 +209,7 @@
         
             if ($query2) {
               echo "<script>alert('Data Karyawan berhasil diubah!')</script>";
-              echo "<script>location='detail.php?id=$id'</script>";
+              echo "<script>location='detail?id=$id'</script>";
                 
             } else {
                 var_dump($query2);

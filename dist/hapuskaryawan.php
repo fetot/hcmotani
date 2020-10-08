@@ -9,7 +9,7 @@
 
       if ($queryhapus2) {
         echo "<script>alert('Data Karyawan berhasil dihapus!')</script>";
-        echo "<script>location='index.php'</script>";
+        echo "<script>location='index'</script>";
       } else {
           var_dump($queryhapus2);
       }
