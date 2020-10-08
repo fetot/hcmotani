@@ -1,7 +1,7 @@
 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Otani <?php echo date("Y");?></div>
+                            <div class="text-muted">Copyright &copy; Human Capital Management Otani <?php echo date("Y");?></div>
                         </div>
                     </div>
                 </footer>
@@ -17,12 +17,12 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
          <!-- Optional JavaScript -->
-         <script>
+         <!-- <script>
                setTimeout(function() {
                     window.location.href="logout.php";   
                     alert('Anda terlalu lama diam. Silahkan login kembali!')             
-                }, 600000);
-        </script>
+                }, 30000);
+        </script> -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/popper.min.js"></script>

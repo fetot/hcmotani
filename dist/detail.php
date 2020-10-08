@@ -13,7 +13,28 @@ $id = $_GET['id'];
                                 <li class="breadcrumb-item active" aria-current="page">Info Karyawan</li>
                             </ol>
                         </nav>
-                        <div class="card mb-4">
+
+                        <?php 
+                            $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                            $tabel = $tampil -> fetch_assoc();
+                        ?>
+
+                        <div class="">
+                        </div>
+
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-wrench fa-fw mr-1"></i>Opsi
+                            </a>
+
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="dropdown-item text-primary"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                            <a href="tambahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="dropdown-item text-warning"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
+                            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
+                          </div>
+                        </div>
+
+                        <div class="card mb-4 mt-3">
                             <div class="card-header">
                                 <i class="fas fa-user-check mr-1"></i>
                                 Info Karyawan
@@ -21,10 +42,7 @@ $id = $_GET['id'];
                             <div class="card-body">
 
                             
-                        <?php 
-                            $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
-                            $tabel = $tampil -> fetch_assoc();
-                        ?>
+                        
 
 <table class="table table-sm table-borderless p-2">
   <tbody style="font-size: 0.9rem">
@@ -182,9 +200,7 @@ $id = $_GET['id'];
 
     <tr>
         <td scope="row" colspan="2">
-        <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" class="btn btn-primary mt-2 mr-2"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-            <a href="tambahsp.php?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="btn btn-warning mt-2 mr-2"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
-            <a href="ubahkaryawan.php?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="btn btn-danger mt-2 mr-2"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
+            
         </td>
     </tr>
 

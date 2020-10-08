@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2020 at 12:36 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Waktu pembuatan: 08 Okt 2020 pada 07.57
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_cuti`
+-- Struktur dari tabel `tbl_cuti`
 --
 
 CREATE TABLE `tbl_cuti` (
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_cuti` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_infokaryawan`
+-- Struktur dari tabel `tbl_infokaryawan`
 --
 
 CREATE TABLE `tbl_infokaryawan` (
@@ -60,7 +60,7 @@ CREATE TABLE `tbl_infokaryawan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_infokaryawan`
+-- Dumping data untuk tabel `tbl_infokaryawan`
 --
 
 INSERT INTO `tbl_infokaryawan` (`id`, `id_karyawan`, `nama`, `jenis_kelamin`, `ttl`, `alamat`, `agama`, `status_nikah`, `no_hp`, `pendidikan`, `nik`, `waktudibuat`, `terakhirdiubah`) VALUES
@@ -346,7 +346,7 @@ INSERT INTO `tbl_infokaryawan` (`id`, `id_karyawan`, `nama`, `jenis_kelamin`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_masterkaryawan`
+-- Struktur dari tabel `tbl_masterkaryawan`
 --
 
 CREATE TABLE `tbl_masterkaryawan` (
@@ -358,7 +358,7 @@ CREATE TABLE `tbl_masterkaryawan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_masterkaryawan`
+-- Dumping data untuk tabel `tbl_masterkaryawan`
 --
 
 INSERT INTO `tbl_masterkaryawan` (`id_karyawan`, `tgl_masukkerja`, `bagian`, `badge`, `status`) VALUES
@@ -643,7 +643,7 @@ INSERT INTO `tbl_masterkaryawan` (`id_karyawan`, `tgl_masukkerja`, `bagian`, `ba
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_resign`
+-- Struktur dari tabel `tbl_resign`
 --
 
 CREATE TABLE `tbl_resign` (
@@ -658,7 +658,7 @@ CREATE TABLE `tbl_resign` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sp`
+-- Struktur dari tabel `tbl_sp`
 --
 
 CREATE TABLE `tbl_sp` (
@@ -672,7 +672,7 @@ CREATE TABLE `tbl_sp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_sp`
+-- Dumping data untuk tabel `tbl_sp`
 --
 
 INSERT INTO `tbl_sp` (`no`, `id_karyawan`, `tgl_sp`, `jenissp`, `keterangan`, `waktudibuat`, `terakhirdiubah`) VALUES
@@ -680,13 +680,13 @@ INSERT INTO `tbl_sp` (`no`, `id_karyawan`, `tgl_sp`, `jenissp`, `keterangan`, `w
 (6, 263, '2020-07-14', 'I', 'mencetak bahan terlalu banyak dari yang ditentukan', '2020-10-03 23:41:25', '2020-10-03 16:41:25'),
 (9, 116, '2020-04-02', 'III', 'merokok di area lokasi kerja terlihat oleh Pimpinan Otani', '2020-10-05 16:24:28', '2020-10-05 09:24:28'),
 (10, 87, '2020-04-03', 'III', 'merokok di area lokasi kerja terlihat oleh Pimpinan Otani', '2020-10-05 16:25:39', '2020-10-05 09:25:39'),
-(11, 26, '2020-04-13', 'I', 'akelalaian kerja', '2020-10-05 16:26:31', '2020-10-05 09:46:04'),
+(11, 26, '2020-04-13', 'I', 'kelalaian kerja', '2020-10-05 16:26:31', '2020-10-08 02:25:45'),
 (12, 112, '2020-07-14', 'I', 'kelalaian kerja karena kurang memahami informasi yang diterima', '2020-10-05 16:26:59', '2020-10-05 09:26:59');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_user`
+-- Struktur dari tabel `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -696,7 +696,7 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_user`
+-- Dumping data untuk tabel `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id`, `username`, `password`) VALUES
@@ -707,77 +707,77 @@ INSERT INTO `tbl_user` (`id`, `username`, `password`) VALUES
 --
 
 --
--- Indexes for table `tbl_cuti`
+-- Indeks untuk tabel `tbl_cuti`
 --
 ALTER TABLE `tbl_cuti`
   ADD PRIMARY KEY (`no`);
 
 --
--- Indexes for table `tbl_infokaryawan`
+-- Indeks untuk tabel `tbl_infokaryawan`
 --
 ALTER TABLE `tbl_infokaryawan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_masterkaryawan`
+-- Indeks untuk tabel `tbl_masterkaryawan`
 --
 ALTER TABLE `tbl_masterkaryawan`
   ADD PRIMARY KEY (`id_karyawan`);
 
 --
--- Indexes for table `tbl_resign`
+-- Indeks untuk tabel `tbl_resign`
 --
 ALTER TABLE `tbl_resign`
   ADD PRIMARY KEY (`no`);
 
 --
--- Indexes for table `tbl_sp`
+-- Indeks untuk tabel `tbl_sp`
 --
 ALTER TABLE `tbl_sp`
   ADD PRIMARY KEY (`no`);
 
 --
--- Indexes for table `tbl_user`
+-- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_cuti`
+-- AUTO_INCREMENT untuk tabel `tbl_cuti`
 --
 ALTER TABLE `tbl_cuti`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_infokaryawan`
+-- AUTO_INCREMENT untuk tabel `tbl_infokaryawan`
 --
 ALTER TABLE `tbl_infokaryawan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
--- AUTO_INCREMENT for table `tbl_masterkaryawan`
+-- AUTO_INCREMENT untuk tabel `tbl_masterkaryawan`
 --
 ALTER TABLE `tbl_masterkaryawan`
   MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
--- AUTO_INCREMENT for table `tbl_resign`
+-- AUTO_INCREMENT untuk tabel `tbl_resign`
 --
 ALTER TABLE `tbl_resign`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_sp`
+-- AUTO_INCREMENT untuk tabel `tbl_sp`
 --
 ALTER TABLE `tbl_sp`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
