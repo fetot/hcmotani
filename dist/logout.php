@@ -6,5 +6,5 @@ session_start();
 session_destroy();
  
 // mengalihkan halaman sambil mengirim pesan logout
-header("location:login?pesan=logout");
+header("location:login?p=logout");
 ?>

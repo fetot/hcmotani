@@ -15,7 +15,7 @@
     <body>
     <script>
         setTimeout(function () {
-        window.location.href= 'dist/login?pesan=belum_login'; // the redirect goes here
+        window.location.href= 'dist/login?p=belum_login'; // the redirect goes here
 
         },3500); //duration
     </script>
@@ -27,6 +27,7 @@
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
                                     <h1 class="display-1">401</h1>
+                                    <img class="mb-2 img-error" src="dist/assets/img/401.png" />
                                     <p class="lead">Tidak memiliki akses</p>
                                     <p>Akses ditolak, silahkan login terlebih dahulu.</p>
                                     <a href="dist/login">

@@ -28,7 +28,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="fas fa-user-tie fa-fw mr-1"></i>HCM Otani</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="fas fa-user-tie fa-fw mr-1"></i>HCM Otani v.1</h3></div>
                                     <div class="card-body">
                                         <form name="form1" method="post" action="cek_login.php">
                                             <div class="form-group">
@@ -48,12 +48,12 @@
                                     <div class="card-footer text-center">
                                         <div class="small">
                                         <?php 
-                                            if(isset($_GET['pesan'])){
-                                                if($_GET['pesan'] == "gagal"){
+                                            if(isset($_GET['p'])){
+                                                if($_GET['p'] == "gagal"){
                                                     echo "Username atau Password salah!";
-                                                }else if($_GET['pesan'] == "logout"){
+                                                }else if($_GET['p'] == "logout"){
                                                     echo "Anda telah berhasil keluar.";
-                                                }else if($_GET['pesan'] == "belum_login"){
+                                                }else if($_GET['p'] == "belum_login"){
                                                     echo "Anda harus masuk terlebih dahulu.";
                                                 }
                                             }
