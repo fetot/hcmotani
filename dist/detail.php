@@ -12,8 +12,8 @@ $id = $_GET['id'];
 
                     <div class="container-fluid">
                       <div class="row mt-4 align-items-center">
-                        <h1 class="col-md-3">Info Karyawan</h1>
-                        <div class="btn-toolbar col-md-3 offset-md-6 justify-content-end">
+                        <h1 class="col-md-4">Info Karyawan</h1>
+                        <div class="btn-toolbar col-md-3 offset-md-5 justify-content-end">
                           <div class="dropdown">
                               <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-wrench fa-fw mr-1"></i>Opsi
@@ -21,6 +21,10 @@ $id = $_GET['id'];
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                               <a href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>" class="dropdown-item text-primary"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                              <a
+                                                href="tambahcuti?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
+                                                class="dropdown-item text-primary">
+                                                <i class="fas fa-check fa-fw mr-1"></i>Izin Cuti</a>
                               <a href="tambahsp?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari=" class="dropdown-item text-warning"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
                               <a href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>" data-toggle="modal" data-target="#modalDelKonfirmasi" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
                             </div>

@@ -8,6 +8,7 @@
         <meta name="author" content="" />
         <title>401 Akses ditolak - HCM Otani</title>
         <link href="dist/css/styles.css" rel="stylesheet" />
+        <link rel="icon" href="dist/assets/img/favicon.ico" type="image/png" sizes="16x16">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body>

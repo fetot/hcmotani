@@ -8,30 +8,11 @@
             <h1 class="col-md-3">Tampil Data</h1>
             <div class="btn-toolbar col-md-3 offset-md-6 justify-content-end">
                 <div class="btn-group ml-2">
-                    <div class="dropdown">
-                        <a
-                            class="btn btn-outline-secondary dropdown-toggle"
-                            href="#"
-                            role="button"
-                            id="dropdownMenuLink"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                            <i class="fas fa-file-download fa-fw mr-1"></i>Eksport
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a href="#" class="dropdown-item text-success">
-                                <i class="fas fa-file-excel fa-fw mr-1"></i>Excel (.xlsx)</a>
-                            <a href="#" class="dropdown-item text-danger">
-                                <i class="fas fa-file-pdf fa-fw mr-1"></i>PDF (.pdf)</a>
-                        </div>
-                    </div>
                     <a
                         href="cetak/cetakdatakaryawan"
                         target="_blank"
                         class="btn btn-outline-secondary">
-                        <i class="fas fa-print fa-fw mr-1"></i>Cetak</a>
+                        <i class="fas fa-print fa-fw mr-1"></i>Cetak/Eksport</a>
                 </div>
 
             </div>
@@ -120,6 +101,10 @@
                                                 class="dropdown-item text-primary"
                                                 href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                                            <a
+                                                href="tambahcuti?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
+                                                class="dropdown-item text-primary">
+                                                <i class="fas fa-check fa-fw mr-1"></i>Izin Cuti</a>
                                             <a
                                                 href="tambahsp?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
                                                 class="dropdown-item text-warning">

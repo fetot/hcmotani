@@ -14,20 +14,20 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="datasp">Tampil Data SP</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Ubah Data SP</li>
+                                <li class="breadcrumb-item"><a href="datacuti">Tampil Data Cuti</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ubah Data Cuti</li>
                             </ol>
                         </nav>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-edit mr-1"></i>
-                                Surat Peringatan
+                                Izin Cuti
                             </div>
                             <div class="card-body">
 
                             
                         <?php 
-                            $tampil = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan='$keyword'");
+                            $tampil = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan='$keyword'");
                             $tabel = $tampil -> fetch_assoc();
                             $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$keyword'");
                             $tabel2 = $tampil2 -> fetch_assoc();
@@ -35,7 +35,7 @@
 
 
 <table class="table table-sm table-borderless p-2">
-<form method="post" action="ubahsp?inputID=<?php echo $keyword; ?>" name="form1">
+<form method="post" action="ubahcuti?inputID=<?php echo $keyword; ?>" name="form1">
   <tbody style="font-size: 0.9rem">
   
   <tr>
@@ -63,34 +63,23 @@
     </tr>
 
     <tr>
-      <th scope="row">Tanggal Diberikan SP</th>
+      <th scope="row">Tanggal Izin Cuti</th>
       <td>
-        <input type="date" id="inputTglSP" name="inputTglSP" class="form-control form-control-sm mb-1" required value="<?php echo $tabel['tgl_sp']; ?>">
+        <input type="date" id="inputTglIzinCuti" name="inputTglIzinCuti" class="form-control form-control-sm mb-1" required value="<?php echo $tabel['tgl_izincuti']; ?>">
       </td>
     </tr>
 
     <tr>
-      <th scope="row">Jenis SP</th>
+      <th scope="row">Tanggal Akhir Cuti</th>
       <td>
-      <div class="form-check form-check-inline mb-1">
-            <input class="for1m-check-input mr-1" type="radio" name="jenissp" id="jenissp1" value="I" <?php if($tabel['jenissp'] == "I"){echo "checked";}; ?> required>
-            <label class="form-check-label" for="jenissp1">I</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="jenissp" id="jenissp2" value="II" <?php if($tabel['jenissp'] == "II"){echo "checked";}; ?> required>
-            <label class="form-check-label" for="jenissp2">II</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="jenissp" id="jenissp3" value="III" <?php if($tabel['jenissp'] == "III"){echo "checked";}; ?> required>
-            <label class="form-check-label" for="jenissp3">III</label>
-        </div>
+        <input type="date" id="inputTglAkhirCuti" name="inputTglAkhirCuti" class="form-control form-control-sm mb-1" required value="<?php echo $tabel['tgl_akhircuti']; ?>">
       </td>
     </tr>
 
     <tr>
-      <th scope="row">Keterangan</th>
+      <th scope="row">Alasan</th>
       <td>
-        <textarea id="inputKet" name="inputKet" class="form-control form-control-sm mb-1" placeholder="Keterangan SP" row="3" required autofocus><?php echo $tabel['keterangan']; ?></textarea>
+        <textarea id="inputAlasan" name="inputAlasan" class="form-control form-control-sm mb-1" placeholder="Alasan Cuti" row="3" required autofocus><?php echo $tabel['alasan']; ?></textarea>
       </td>
     </tr>
 
@@ -98,8 +87,8 @@
         <th scope="row">
         </th>
         <td>
-          <a class="btn btn-outline-secondary mt-3" type="button" href="datasp">Batal</a>
-          <button class="btn btn-primary mt-3 ml-2" type="button" data-toggle="modal" data-target="#modalKonfirmasi"><i class="fas fa-edit fa-fw mr-1"></i>Ubah SP</button>
+            <a class="btn btn-outline-secondary mt-3" type="button" href="datacuti">Batal</a>
+            <button class="btn btn-primary mt-3 ml-2" type="button" data-toggle="modal" data-target="#modalKonfirmasi"><i class="fas fa-edit fa-fw mr-1"></i>Ubah Cuti</button>
         </td>
         <td></td>
 
@@ -131,17 +120,17 @@
 
 <?php
     if(isset($_POST['Submit'])){
-        $tglsp = $_POST['inputTglSP'];
-        $jenissp = $_POST['jenissp'];
-        $ket = $_POST['inputKet'];
+        $tglcuti = $_POST['inputTglIzinCuti'];
+        $tglakhir = $_POST['inputTglAkhirCuti'];
+        $alasan = $_POST['inputAlasan'];
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "UPDATE tbl_sp SET tgl_sp='$tglsp',jenissp='$jenissp',keterangan='$ket',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+        $query1 = mysqli_query($koneksi, "UPDATE tbl_cuti SET tgl_izincuti='$tglcuti',tgl_akhircuti='$tglakhir',alasan='$alasan',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
 
         if($query1){
-            echo "<script>alert('Data SP berhasil diubah!')</script>";
-            echo "<script>location='datasp'</script>";
+            echo "<script>alert('Data Cuti berhasil diubah!')</script>";
+            echo "<script>location='datacuti'</script>";
         }
     }
 ?>
