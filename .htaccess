@@ -1,6 +1,6 @@
-ErrorDocument 404 /404.php
-ErrorDocument 401 /401.php
-ErrorDocument 500 /500.php
+ErrorDocument 404 /hcmotani/404.php
+ErrorDocument 401 /hcmotani/401.php
+ErrorDocument 500 /hcmotani/500.php
 
 <IfModule mod_rewrite.c>
 RewriteEngine on
