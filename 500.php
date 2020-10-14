@@ -27,7 +27,7 @@
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
                                     <h1 class="display-1">500</h1>
-                                    <img class="mb-2 img-error" src="dist/assets/img/500.png" />
+                                    <img class="mb-2 img-error" src="/hcmotani/dist/assets/img/500.png" />
                                     <p class="lead">Terjadi kesalahan pada server.</p>
                                     <a href="/hcmotani/">
                                         <i class="fas fa-arrow-left mr-1"></i>

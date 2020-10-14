@@ -177,7 +177,7 @@
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_masterkaryawan (tgl_masukkerja,bagian,badge,status) VALUES ('$tglmskkerja','$bagian','$badge','Aktif')");
+        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_masterkaryawan (tgl_masukkerja,bagian,badge,status,waktudibuat,terakhirdiubah) VALUES ('$tglmskkerja','$bagian','$badge','Aktif',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
         if ($query1) {
             $last_id = mysqli_query($koneksi, "SELECT id_karyawan FROM tbl_masterkaryawan ORDER BY id_karyawan DESC");
             $row_last = $last_id->fetch_assoc();

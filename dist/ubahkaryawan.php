@@ -10,10 +10,10 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                                 <?php if(empty($_GET['id'])){
-                                  echo '<li class="breadcrumb-item"><a href="index">Tampil Data Karyawan</a></li>';
+                                  echo '<li class="breadcrumb-item"><a href="datakaryawan">Tampil Data Karyawan</a></li>';
                                 }else{
                                   echo "
-                                  <li class='breadcrumb-item'><a href='index'>Tampil Data Karyawan</a></li>
+                                  <li class='breadcrumb-item'><a href='datakaryawan'>Tampil Data Karyawan</a></li>
                                   <li class='breadcrumb-item'><a href='detail?id=$id'>Info Karyawan</a></li>
                                   ";
                                 } ?>
@@ -203,7 +203,7 @@
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET tgl_masukkerja='$tglmskkerja',bagian='$bagian',badge='$badge',status='$status' WHERE id_karyawan=$id");
+        $query1 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET tgl_masukkerja='$tglmskkerja',bagian='$bagian',badge='$badge',status='$status',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$id");
         if ($query1) {
             $query2 = mysqli_query($koneksi, "UPDATE tbl_infokaryawan SET id_karyawan='$id',nama='$nama',jenis_kelamin='$jeniskelamin',ttl='$ttl',alamat='$alamat',agama='$agama',status_nikah='$statusnikah',no_hp='$nohp',pendidikan='$pendidikan',nik='$nik',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id=$id");
         

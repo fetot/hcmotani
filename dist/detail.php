@@ -36,6 +36,10 @@ $id = $_GET['id'];
                             class="dropdown-item text-primary">
                             <i class="fas fa-check fa-fw mr-1"></i>Izin Cuti</a>
                         <a
+                            href="tambahhubkel?id=<?php echo $tabel['id_karyawan']; ?>&Cari="
+                            class="dropdown-item text-primary">
+                            <i class="fas fa-plus fa-fw mr-1"></i>Hubungan Keluarga</a>
+                        <a
                             href="tambahsp?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
                             class="dropdown-item text-warning">
                             <i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
@@ -48,7 +52,7 @@ $id = $_GET['id'];
                     </div>
                 </div>
                 <div class="btn-group ml-2">
-                    <button onClick="window.print();" class="btn btn-outline-secondary">
+                    <button onclick="window.print();" class="btn btn-outline-secondary">
                         <i class="fas fa-print fa-fw mr-1"></i>Cetak</button>
                 </div>
 
@@ -111,11 +115,26 @@ $id = $_GET['id'];
                     <a href="index">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="index">Tampil Data Karyawan</a>
+                    <a href="datakaryawan">Tampil Data Karyawan</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Info Karyawan</li>
             </ol>
         </nav>
+
+        <?php 
+            $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel WHERE tbl_hubkel.id_karyawan='$id' OR tbl_hubkel.id_karyawan_rel='$id'");
+            $jlhhubkel = mysqli_num_rows($tampil2);
+            $tabel2 = $tampil2 -> fetch_assoc();
+
+            $tampil3 = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan='$id'");
+            $jlhsp = mysqli_num_rows($tampil3);
+            $tabel3 = $tampil3 -> fetch_assoc();
+
+            $tampil4 = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan='$id'");
+            $jlhcuti = mysqli_num_rows($tampil4);
+            $tabel4 = $tampil4 -> fetch_assoc();
+
+        ?>
 
         <div class="card mb-4 mt-3">
             <div class="card-header">
@@ -143,7 +162,7 @@ $id = $_GET['id'];
                             aria-controls="hubkel"
                             aria-selected="false">
                             <i class="fas fa-user-friends mr-1"></i>
-                            Hubungan Keluarga<span class="badge badge-info ml-1">0</span>
+                            Hubungan Keluarga<span class="badge badge-warning ml-1"><?php echo $jlhhubkel; ?></span>
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -156,7 +175,7 @@ $id = $_GET['id'];
                             aria-controls="sp"
                             aria-selected="false">
                             <i class="fas fa-user-clock mr-1"></i>
-                            Riwayat SP<span class="badge badge-info ml-1">0</span>
+                            Riwayat SP<span class="badge badge-warning ml-1"><?php echo $jlhsp; ?></span>
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -169,7 +188,7 @@ $id = $_GET['id'];
                             aria-controls="cuti"
                             aria-selected="false">
                             <i class="fas fa-user-clock mr-1"></i>
-                            Riwayat Cuti<span class="badge badge-info ml-1">0</span>
+                            Riwayat Cuti<span class="badge badge-warning ml-1"><?php echo $jlhcuti; ?></span>
                         </a>
                     </li>
                 </ul>
@@ -177,7 +196,7 @@ $id = $_GET['id'];
 
             <div class="card-body tab-content" id="myTabContent">
 
-              <!-- tab info karyawan -->
+                <!-- tab info karyawan -->
                 <div
                     class="tab-pane fade show active"
                     id="info"
@@ -186,10 +205,7 @@ $id = $_GET['id'];
 
                     <table class="table table-sm table-borderless p-2">
                         <tbody style="font-size: 0.9rem">
-                            <form
-                                method="post"
-                                action="detail?id=<?php echo $id; ?>"
-                                name="form1">
+                            <form method="post" action="detail?id=<?php echo $id; ?>" name="form1">
                                 <tr>
                                     <th scope="row">ID Karyawan</th>
                                     <td>
@@ -447,39 +463,142 @@ $id = $_GET['id'];
                     </table>
 
                 </div>
-              <!-- end tab info karyawan -->
-              <!-- tab hubungan keluarga -->
+                <!-- end tab info karyawan -->
+                <!-- tab hubungan keluarga -->
                 <div
-                    class="tab-pane fade"
+                    class="tab-pane fade table-reponsive"
                     id="hubkel"
                     role="tabpanel"
                     aria-labelledby="hubkel-tab">
 
-                      ini hub kel
+                    <?php if(empty($tabel2)): echo '<div class="text-center m-4"><h6 class="text-secondary">Karyawan ini tidak memiliki Hubungan Keluarga.</h6></div>'?>
+                <?php else: ?>
+                    <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                        <thead>
+                            <tr class="text-center">
+                                <th>No</th>
+                                <th>Dengan ID</th>
+                                <th>Dengan Nama</th>
+                                <th>Dari Bagian</th>
+                                <th>Hubungan</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr class="text-center">
+                                <th>No</th>
+                                <th>Dengan ID</th>
+                                <th>Dengan Nama</th>
+                                <th>Dari Bagian</th>
+                                <th>Hubungan</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        <?php 
+                                                $nomor = 1;
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_hubkel WHERE tbl_hubkel.id_karyawan = $id OR tbl_hubkel.id_karyawan_rel = $id");
+                                                while($tabel = $tampil -> fetch_assoc()){ 
+                                                     if($tabel['id_karyawan'] == $id){
+                                                        $idkar = $tabel['id_karyawan_rel'];
+                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan, tbl_masterkaryawan WHERE tbl_infokaryawan.id_karyawan = $idkar");
+                                                        $tabel2 = $tampil2 -> fetch_assoc();
+                                                        $nama = $tabel2['nama'];
+                                                        $bagian = $tabel2['bagian']; 
+                                                     }
+                                                     elseif($tabel['id_karyawan_rel'] == $id){
+                                                        $idkar = $tabel['id_karyawan'];
+                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkar");
+                                                        $tabel2 = $tampil2 -> fetch_assoc();
+                                                        $nama = $tabel2['nama'];
+                                                        $bagian = $tabel2['bagian'];
+                                                     }
+                                            ?>
+                            <tr>
+                                <td class="text-center"><?php echo $nomor; ?></td>
+                                <td class="text-center"><?php echo $idkar; ?></td>
+                                <td>
+                                    <a class="text-dark" href="detail?id=<?php echo $idkar; ?>"><?php echo $nama; ?></a>
+                                </td>
+                                <td class="text-center"><?php echo $bagian; ?></td>
+                                <td class="text-center"><?php echo $tabel['hubungan']; ?></td>
+                                <td>
+                                    <div class="dropdown show">
+                                        <a
+                                            class="btn btn-secondary dropdown-toggle"
+                                            href="#"
+                                            role="button"
+                                            id="dropdownMenuLink"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Opsi
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a
+                                                class="dropdown-item text-primary"
+                                                href="ubahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
+                                            <button
+                                                class="dropdown-item text-danger"
+                                                data-toggle="modal"
+                                                data-target="#modalDelKonfirmasi">
+                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Cuti</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- modal delete -->
+                                    <div
+                                        class="modal fade"
+                                        id="modalDelKonfirmasi"
+                                        tabindex="-1"
+                                        aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
+                                                    dikembalikan.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a
+                                                        href="hapushubkel?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        class="btn btn-danger">Hapus</a>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end modal -->
+
+                                </td>
+                            </tr>
+                            <?php $nomor++; ?>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <?php endif ?>
 
                 </div>
-              <!-- end tab hubungan keluarga -->
-              <!-- tab riwayat sp -->
+                <!-- end tab hubungan keluarga -->
+                <!-- tab riwayat sp -->
                 <div
                     class="tab-pane fade table-responsive"
                     id="sp"
                     role="tabpanel"
                     aria-labelledby="sp-tab">
 
-                    <?php 
-                                                $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan='$id'");
-                                                $tabel = $tampil -> fetch_assoc();
-                                                $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
-                                                $tabel2 = $tampil2 -> fetch_assoc();   
-                                            ?>
-
-                <?php if(empty($tabel)): echo '<div class="text-center m-4"><h6 class="text-secondary">Karyawan ini tidak memiliki Riwayat SP.</h6></div>'?>
+                    <?php if(empty($tabel3)): echo '<div class="text-center m-4"><h6 class="text-secondary">Karyawan ini tidak memiliki Riwayat SP.</h6></div>'?>
                 <?php else: ?>
-                    <table
-                        class="table table-bordered table-hover"
-                        width="100%"
-                        cellspacing="0">
+                    <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -493,6 +612,14 @@ $id = $_GET['id'];
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                                                $nomor = 1;
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan = $id");
+                                                while($tabel = $tampil -> fetch_assoc()){
+                                                     $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                                                     $tabel2 = $tampil2 -> fetch_assoc();
+                                                    
+                                            ?>
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
@@ -561,32 +688,22 @@ $id = $_GET['id'];
                                 </td>
                             </tr>
                             <?php $nomor++; ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                     <?php endif ?>
                 </div>
-              <!-- end tab riwayat sp -->
-              <!-- tab riwayat cuti -->
+                <!-- end tab riwayat sp -->
+                <!-- tab riwayat cuti -->
                 <div
                     class="tab-pane fade table-responsive"
                     id="cuti"
                     role="tabpanel"
                     aria-labelledby="cuti-tab">
 
-                    <?php 
-                                                $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan='$id'");
-                                                $tabel = $tampil -> fetch_assoc();
-                                                $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
-                                                $tabel2 = $tampil2 -> fetch_assoc();          
-                                            ?>
-
-                <?php if(empty($tabel)): echo '<div class="text-center m-4"><h6 class="text-secondary">Karyawan ini tidak memiliki Riwayat Cuti.</h6></div>'?>
+                    <?php if(empty($tabel4)): echo '<div class="text-center m-4"><h6 class="text-secondary">Karyawan ini tidak memiliki Riwayat Cuti.</h6></div>'?>
                 <?php else: ?>
-                    <table
-                        class="table table-bordered table-hover"
-                        width="100%"
-                        cellspacing="0">
+                    <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -600,6 +717,13 @@ $id = $_GET['id'];
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                                $nomor = 1;
+                                $tampil = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan = $id");
+                                while($tabel = $tampil -> fetch_assoc()){
+                                    $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                                    $tabel2 = $tampil2 -> fetch_assoc();
+                        ?>
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
@@ -668,12 +792,12 @@ $id = $_GET['id'];
                                 </td>
                             </tr>
                             <?php $nomor++; ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                     <?php endif ?>
-
                 </div>
-              <!-- end tab riwayat cuti -->
+                <!-- end tab riwayat cuti -->
 
             </div>
             <!-- end card body -->

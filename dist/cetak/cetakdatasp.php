@@ -9,17 +9,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <style type="text/css" media="print">
-            @page {
-                size: landscape;
-            }
-            body {
-                writing-mode: tb-rl;
-            }
-        </style>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Data Karyawan Harlep PT. OTANI (<?php echo date('d-M-Y');?>)</title>
+        <title>Data Surat Peringatan Harlep PT. OTANI (<?php echo date('d-M-Y');?>)</title>
         <link
             rel="icon"
             href="../assets/img/favicon.ico"
@@ -105,14 +98,14 @@
                         <li class="breadcrumb-item">
                             <a href="../index">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="../datakaryawan">Tampil Data Karyawan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Cetak Data Karyawan</li>
+                        <li class="breadcrumb-item"><a href="../datasp">Tampil Data SP</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cetak Data SP</li>
                     </ol>
                 </nav>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-users mr-1"></i>
-                        Data Karyawan Harlep (<?php echo date("d/m/Y"); ?>)
+                        <i class="fas fa-table mr-1"></i>
+                        Data Surat Peringatan (<?php echo date("d/m/Y"); ?>)
                     </div>
                     <div class="card-body">
                         <div style="table-responsive">
@@ -128,40 +121,24 @@
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Bagian</th>
-                                        <th>Badge</th>
-                                        <th>Tanggal Masuk Kerja</th>
-                                        <th>Tempat/Tgl Lahir</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Alamat</th>
-                                        <th>Agama</th>
-                                        <th>Status Nikah</th>
-                                        <th>No HP</th>
-                                        <th>Pendidikan</th>
-                                        <th>NIK</th>
-                                        <th>Status</th>
+                                        <th>SP</th>
+                                        <th>Tanggal Diberikan SP</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
                                                 $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_infokaryawan.id_karyawan = tbl_masterkaryawan.id_karyawan");
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_sp, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_sp.id_karyawan AND tbl_infokaryawan.id_karyawan = tbl_sp.id_karyawan");
                                                 while($tabel = $tampil -> fetch_assoc()){
                                             ?>
                                     <tr>
                                         <td class="text-center"><?php echo $nomor; ?></td>
                                         <td><?php echo $tabel['nama']; ?></td>
                                         <td class="text-center"><?php echo $tabel['bagian']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['badge']; ?></td>
-                                        <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_masukkerja'])); ?></td>
-                                        <td class="text-center"><?php echo $tabel['ttl']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['jenis_kelamin']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['alamat']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['agama']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['status_nikah']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['no_hp']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['pendidikan']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['nik']; ?></td>
-                                        <td class="text-center"><?php echo $tabel['status']; ?></td>
+                                        <td class="text-center"><?php echo $tabel['jenissp']; ?></td>
+                                        <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_sp'])); ?></td>
+                                        <td><?php echo $tabel['keterangan']; ?></td>
 
                                     </tr>
                                     <?php $nomor++ ?>
@@ -201,8 +178,7 @@
                 $('#cetaktabel').DataTable({
                     dom: 'Bfrtip',
                     buttons: [
-                    'print', 'excel',{extend: 'pdfHtml5',
-                    orientation: 'landscape',pageSize: 'LEGAL'}
+                    'print', 'excel',{extend: 'pdfHtml5',pageSize: 'LEGAL'}
                     ],
                     paging: false
                     });

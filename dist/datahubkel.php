@@ -4,12 +4,12 @@ include "uiheader.php";
 
 <main>
     <div class="container-fluid">
-        <div class="row mt-4 align-items-center">
+    <div class="row mt-4 align-items-center">
             <h1 class="col-md-3">Tampil Data</h1>
             <div class="btn-toolbar col-md-3 offset-md-6 justify-content-end">
                 <div class="btn-group ml-2">
                     <a
-                        href="cetak/cetakdatacuti"
+                        href="cetak/cetakdatahubkel"
                         class="btn btn-outline-secondary">
                         <i class="fas fa-print fa-fw mr-1"></i>Cetak/Eksport</a>
                 </div>
@@ -22,42 +22,13 @@ include "uiheader.php";
                 <li class="breadcrumb-item">
                     <a href="index">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Tampil Data Cuti</li>
+                <li class="breadcrumb-item active" aria-current="page">Tampil Data Hubungan Keluarga</li>
             </ol>
         </nav>
-
-        <div class="row mb-3">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card border-info text-info">
-                                    <div class="card-body align-items-center justify-content-center">
-                                    
-                                        <h1 class="font-weight-bolder"><?php 
-                                                $datacuti = $koneksi -> query("SELECT * FROM tbl_cuti");
-                                                $jlhcuti = mysqli_num_rows($datacuti);
-                                                echo $jlhcuti;
-                                        ?></h1>
-                                        <div class="small">Total Izin Cuti</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card border-success text-success">
-                                    <div class="card-body align-items-center justify-content-center">
-                                        <h1 class="font-weight-bolder"><?php
-                                                $datacuti = $koneksi -> query("SELECT * FROM tbl_masterkaryawan WHERE tbl_masterkaryawan.status = 'Cuti'");
-                                                $jlhcuti = mysqli_num_rows($datacuti);
-                                                echo $jlhcuti;
-                                        ?></h3>
-                                        <div class="small">Izin Cuti yang aktif</div>
-                                    </div>
-                                </div>
-                            </div>
-        </div>
-
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Data Izin Cuti
+                <i class="fas fa-user-friends mr-1"></i>
+                Data Hubungan Keluarga
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -72,9 +43,10 @@ include "uiheader.php";
                                 <th>ID Karyawan</th>
                                 <th>Nama</th>
                                 <th>Bagian</th>
-                                <th>Izin Cuti</th>
-                                <th>Cuti Sampai</th>
-                                <th>Alasan</th>
+                                <th>Dengan ID</th>
+                                <th>Dengan Nama</th>
+                                <th>Dari Bagian</th>
+                                <th>Hubungan</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -84,27 +56,30 @@ include "uiheader.php";
                                 <th>ID Karyawan</th>
                                 <th>Nama</th>
                                 <th>Bagian</th>
-                                <th>Izin Cuti</th>
-                                <th>Cuti Sampai</th>
-                                <th>Alasan</th>
+                                <th>Dengan ID</th>
+                                <th>Dengan Nama</th>
+                                <th>Dari Bagian</th>
+                                <th>Hubungan</th>
                                 <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
                             <?php 
                                                 $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_cuti, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_cuti.id_karyawan AND tbl_infokaryawan.id_karyawan = tbl_cuti.id_karyawan");
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_hubkel, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_hubkel.id_karyawan AND tbl_infokaryawan.id_karyawan = tbl_hubkel.id_karyawan");
                                                 while($tabel = $tampil -> fetch_assoc()){
-                                                    
+                                                     $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_hubkel.id_karyawan_rel AND tbl_infokaryawan.id_karyawan = tbl_hubkel.id_karyawan_rel");
+                                                     $tabel2 = $tampil2 -> fetch_assoc();
                                             ?>
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
-                                <td><?php echo $tabel['nama']; ?></td>
+                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel['nama']; ?></a></td>
                                 <td class="text-center"><?php echo $tabel['bagian']; ?></td>
-                                <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_izincuti'])); ?></td>
-                                <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_akhircuti'])); ?></td>
-                                <td><?php echo $tabel['alasan']; ?></td>
+                                <td class="text-center"><?php echo $tabel2['id_karyawan_rel']; ?></td>
+                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan_rel']; ?>"><?php echo $tabel2['nama']; ?></a></td>
+                                <td class="text-center"><?php echo $tabel2['bagian']; ?></td>
+                                <td class="text-center"><?php echo $tabel['hubungan']; ?></td>
                                 <td>
                                     <div class="dropdown show">
                                         <a
@@ -121,11 +96,7 @@ include "uiheader.php";
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="detail?id=<?php echo $tabel['id_karyawan']; ?>">
-                                                <i class="fas fa-eye fa-fw mr-1"></i>Info Karyawan</a>
-                                            <a
-                                                class="dropdown-item text-primary"
-                                                href="ubahcuti?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
@@ -157,7 +128,7 @@ include "uiheader.php";
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapuscuti?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapushubkel?id=<?php echo $tabel['id_karyawan']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>
@@ -169,7 +140,7 @@ include "uiheader.php";
                                 </td>
                             </tr>
                             <?php $nomor++; ?>
-                            <?php }  ?>
+                                                <?php } ?>
                         </tbody>
                     </table>
                 </div>

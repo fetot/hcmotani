@@ -4,7 +4,18 @@ include "uiheader.php";
 
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Tampil Data</h1>
+            <div class="row mt-4 align-items-center">
+            <h1 class="col-md-3">Tampil Data</h1>
+            <div class="btn-toolbar col-md-3 offset-md-6 justify-content-end">
+                <div class="btn-group ml-2">
+                    <a
+                        href="cetak/cetakdatasp"
+                        class="btn btn-outline-secondary">
+                        <i class="fas fa-print fa-fw mr-1"></i>Cetak/Eksport</a>
+                </div>
+
+            </div>
+        </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
@@ -14,6 +25,35 @@ include "uiheader.php";
                 <li class="breadcrumb-item active" aria-current="page">Tampil Data SP</li>
             </ol>
         </nav>
+
+        <div class="row mb-3">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card border-info text-info">
+                                    <div class="card-body align-items-center justify-content-center">
+                                    
+                                        <h1 class="font-weight-bolder"><?php 
+                                                $datasp = $koneksi -> query("SELECT * FROM tbl_sp");
+                                                $jlhsp = mysqli_num_rows($datasp);
+                                                echo $jlhsp;
+                                        ?></h1>
+                                        <div class="small">Total Surat Peringatan</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card border-warning text-warning">
+                                    <div class="card-body align-items-center justify-content-center">
+                                        <h1 class="font-weight-bolder"><?php
+                                                $datasp = $koneksi -> query("SELECT * FROM tbl_sp");
+                                                $jlhsp = mysqli_num_rows($datasp);
+                                                echo $jlhsp;
+                                        ?></h3>
+                                        <div class="small">Jumlah karyawan yang memiliki SP</div>
+                                    </div>
+                                </div>
+                            </div>
+        </div>
+
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
@@ -79,6 +119,10 @@ include "uiheader.php";
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a
+                                                class="dropdown-item text-primary"
+                                                href="detail?id=<?php echo $tabel['id_karyawan']; ?>">
+                                                <i class="fas fa-eye fa-fw mr-1"></i>Info Karyawan</a>
                                             <a
                                                 class="dropdown-item text-primary"
                                                 href="ubahsp?inputID=<?php echo $tabel['id_karyawan']; ?>">

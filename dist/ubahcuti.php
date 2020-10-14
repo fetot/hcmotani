@@ -123,6 +123,10 @@
         $tglcuti = $_POST['inputTglIzinCuti'];
         $tglakhir = $_POST['inputTglAkhirCuti'];
         $alasan = $_POST['inputAlasan'];
+
+        $hariini = date('Y-m-d');
+        $hariini_time = strtotime($hariini);
+        $akhircuti_time = strtotime($tglakhir);
     
         include_once("koneksi.php");
     
@@ -131,6 +135,13 @@
         if($query1){
             echo "<script>alert('Data Cuti berhasil diubah!')</script>";
             echo "<script>location='datacuti'</script>";
+
+            //jika tanggal akhir cuti > tanggal hari ini maka status karyawan menjadi cuti
+            if($akhircuti_time > $hariini_time){
+              $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Cuti',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+          }else{
+            $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Aktif',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+          }
         }
     }
 ?>

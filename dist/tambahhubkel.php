@@ -14,21 +14,15 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tambah Data SP</li>
+                                <li class="breadcrumb-item active" aria-current="page">Tambah Data Hubungan Keluarga</li>
                             </ol>
                         </nav>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-user mr-1"></i>
-                                Surat Peringatan
+                                <i class="fas fa-user-friends mr-1"></i>
+                                Hubungan Keluarga
                             </div>
                             <div class="card-body">
-
-                            
-                        <?php 
-                            // $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
-                            // $tabel = $tampil -> fetch_assoc();
-                        ?>
 
 
 <table class="table table-sm table-borderless p-2">
@@ -72,47 +66,39 @@
     <?php endif ?>
 
     <tr>
+      <th scope="row">Dengan ID Karyawan</th>
+      <td>
+        <form method="GET" action="" >
+          <div class="input-group">
+          <input type="text" id="inputID2" name="inputID2" class="form-control form-control-sm mb-1" placeholder="Dengan ID Karyawan" autocomplete="off" required autofocus>
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-primary mb-1" name="Cari2" id="btnCari2" type="submit" ><i class="fas fa-search fa-fw mr-1"></i></button>
+            </div>
+          </div>
+        </form>
+      </td>
+    </tr>
+    
+
+    <tr>
         <th scope="row" colspan="3"><hr></th>
     </tr>
 
     <form method="post" action="tambahsp" name="form1">
     <input type="hidden" name="aidi" value="<?php echo $keyword; ?>" readonly="true" autocomplete="off" required="">
-    <tr>
-      <th scope="row">Tanggal Diberikan SP</th>
-      <td>
-        <input type="date" id="inputTglSP" name="inputTglSP" class="form-control form-control-sm mb-1" required value="<?php echo date("Y-m-d"); ?>">
-      </td>
-    </tr>
+    <input type="hidden" name="aidi2" value="<?php echo $keyword2; ?>" readonly="true" autocomplete="off" required="">
 
     <tr>
-      <th scope="row">Jenis SP</th>
+      <th scope="row">Hubungan</th>
       <td>
-      <div class="form-check form-check-inline mb-1">
-            <input class="for1m-check-input mr-1" type="radio" name="jenissp" id="jenissp1" value="I" required>
-            <label class="form-check-label" for="jenissp1">I</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="jenissp" id="jenissp2" value="II" required>
-            <label class="form-check-label" for="jenissp2">II</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input mr-1" type="radio" name="jenissp" id="jenissp3" value="III" required>
-            <label class="form-check-label" for="jenissp3">III</label>
-        </div>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">Keterangan</th>
-      <td>
-        <textarea id="inputKet" name="inputKet" class="form-control form-control-sm mb-1" placeholder="Keterangan SP" row="3" required autofocus></textarea>
+        <input type="text" id="inputHub" name="inputHub" class="form-control form-control-sm mb-1" placeholder="Hubungan" required autofocus>
       </td>
     </tr>
 
     <tr>
         <th scope="row">
         </th>
-        <td><button class="btn btn-warning mt-3" type="button" data-toggle="modal" data-target="#modalKonfirmasi"><i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</button></td>
+        <td><button class="btn btn-primary mt-3" type="button" data-toggle="modal" data-target="#modalKonfirmasi">Tambah</button></td>
         <td></td>
 
     <div class="modal fade" id="modalKonfirmasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
