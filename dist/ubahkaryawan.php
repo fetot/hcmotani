@@ -1,6 +1,12 @@
 <?php 
     include "uiheader.php";
-    $id = $_GET['id'];
+    if(empty($_GET['id'])){
+      $id = '1';
+      echo "<script>alert('Silahkan pilih Data Karyawan yang ingin diubah!')</script>";
+      echo "<script>location='datakaryawan'</script>";
+    }else{
+      $id = $_GET['id'];
+    }
 ?>
 
 <main>

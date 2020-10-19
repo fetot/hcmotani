@@ -102,7 +102,9 @@
                                             ?>
                             <tr>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
-                                <td><?php echo $tabel['nama']; ?></td>
+                                <td><a
+                                                style="color: black;"
+                                                href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel['nama']; ?></a></td>
                                 <td class="text-center"><?php echo $tabel['bagian']; ?></td>
                                 <td class="text-center"><?php echo $tabel['badge']; ?></td>
                                 <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_masukkerja'])); ?></td>
@@ -136,7 +138,7 @@
                                                 class="dropdown-item text-primary">
                                                 <i class="fas fa-check fa-fw mr-1"></i>Izin Cuti</a>
                                             <a
-                                                href="tambahhubkel?id=<?php echo $tabel['id_karyawan']; ?>&Cari="
+                                                href="tambahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
                                                 class="dropdown-item text-primary">
                                                 <i class="fas fa-plus fa-fw mr-1"></i>Hubungan Keluarga</a>
                                             <a

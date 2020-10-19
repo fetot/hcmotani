@@ -210,20 +210,24 @@
         $hariini_time = strtotime($hariini);
         $akhircuti_time = strtotime($tglakhir);
         
-    
-        include_once("koneksi.php");
-    
-        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_cuti (id_karyawan,tgl_izincuti,tgl_akhircuti,alasan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglcuti','$tglakhir','$alasan',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
-        
-        if($query1){
-          echo "<script>alert('Izin cuti berhasil ditambahkan!')</script>";
-          echo "<script>location='datacuti'</script>";
+        if(!empty($idkaryawan)){
+            include_once("koneksi.php");
+            $query1 = mysqli_query($koneksi, "INSERT INTO tbl_cuti (id_karyawan,tgl_izincuti,tgl_akhircuti,alasan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglcuti','$tglakhir','$alasan',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+            
+            if($query1){
+                echo "<script>alert('Izin cuti berhasil ditambahkan!')</script>";
+                echo "<script>location='datacuti'</script>";
 
-          //jika akhir cuti > tanggal hari ini maka status karyawan menjadi cuti
-          if($akhircuti_time > $hariini_time){
-            $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Cuti',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$idkaryawan");
-          }
+            //jika akhir cuti > tanggal hari ini maka status karyawan menjadi cuti
+                if($akhircuti_time > $hariini_time){
+                    $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Cuti',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$idkaryawan");
+                }
+            }
+        }else{
+            echo "<script>alert('ID Karyawan tidak boleh kosong!')</script>";
+            echo "<script>location='tambahcuti'</script>";
         }
+        
     }
 ?>
 

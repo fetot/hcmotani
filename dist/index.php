@@ -18,79 +18,112 @@
         </nav>
 
         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card border-primary text-primary mb-4">
-                                    <div class="text-center card-body align-items-center justify-content-center">
-                                        <h1 class="font-weight-bolder">
-                                        <?php 
+            <div class="col-xl-3 col-md-6">
+                <div class="card border-primary text-primary mb-4">
+                    <div class="text-center card-body align-items-center justify-content-center">
+                        <h1 class="font-weight-bolder">
+                            <?php 
                                                 $dataharlep = $koneksi -> query("SELECT * FROM tbl_masterkaryawan");
                                                 $jlhharlep = mysqli_num_rows($dataharlep);
                                                 echo $jlhharlep;
                                         ?>
-                                        </h1>
-                                        <div class="small">Total Karyawan Harlep</div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-primary stretched-link" href="datakaryawan">Lihat data</a>
-                                        <div class="small text-primary"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card border-info text-info mb-4">
-                                    <div class="text-center card-body align-items-center justify-content-center">
-                                    
-                                        <h1 class="font-weight-bolder"><?php 
+                        </h1>
+                        <div class="small">Total Karyawan Harlep</div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-primary stretched-link" href="datakaryawan">Lihat data</a>
+                        <div class="small text-primary">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card border-info text-info mb-4">
+                    <div class="text-center card-body align-items-center justify-content-center">
+
+                        <h1 class="font-weight-bolder"><?php 
                                                 $datacuti = $koneksi -> query("SELECT * FROM tbl_cuti");
                                                 $jlhcuti = mysqli_num_rows($datacuti);
                                                 echo $jlhcuti;
                                         ?></h1>
-                                        <div class="small">Total Izin Cuti</div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-info stretched-link" href="datacuti">Lihat data</a>
-                                        <div class="small text-info"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="small">Total Izin Cuti</div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-info stretched-link" href="datacuti">Lihat data</a>
+                        <div class="small text-info">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card border-warning text-warning mb-4">
-                                    <div class="card-body text-center align-items-center justify-content-center">
-                                    
-                                    <h1 class="font-weight-bolder"><?php 
+            <div class="col-xl-3 col-md-6">
+                <div class="card border-warning text-warning mb-4">
+                    <div class="card-body text-center align-items-center justify-content-center">
+
+                        <h1 class="font-weight-bolder"><?php 
                                                 $datacuti = $koneksi -> query("SELECT * FROM tbl_sp");
                                                 $jlhcuti = mysqli_num_rows($datacuti);
                                                 echo $jlhcuti;
                                         ?></h1>
-                                        <div class="small">Total Surat Peringatan</div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-warning stretched-link" href="datasp">Lihat data</a>
-                                        <div class="small text-warning"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="small">Total Surat Peringatan</div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-warning stretched-link" href="datasp">Lihat data</a>
+                        <div class="small text-warning">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card border-danger text-danger mb-4">
-                                    <div class="card-body text-center align-items-center justify-content-center">
-                                    
-                                    <h1 class="font-weight-bolder"><?php 
+            <div class="col-xl-3 col-md-6">
+                <div class="card border-danger text-danger mb-4">
+                    <div class="card-body text-center align-items-center justify-content-center">
+
+                        <h1 class="font-weight-bolder"><?php 
                                                 $datacuti = $koneksi -> query("SELECT * FROM tbl_resign");
                                                 $jlhcuti = mysqli_num_rows($datacuti);
                                                 echo $jlhcuti;
                                         ?></h1>
-                                        <div class="small">Total Karyawan Resign</div>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-danger stretched-link" href="dataresign">Lihat data</a>
-                                        <div class="small text-danger"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="small">Total Karyawan Resign</div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-danger stretched-link" href="dataresign">Lihat data</a>
+                        <div class="small text-danger">
+                            <i class="fas fa-angle-right"></i>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area mr-1"></i>
+                        Jumlah Karyawan Baru (5 Tahun Terakhir)
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartJumlahKaryawanBaru" width="100%" height="40"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar mr-1"></i>
+                        Jumlah Karyawan Resign (Periode <?php echo date('Y'); ?>)
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartJumlahKaryawanResign" width="100%" height="40"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </main>

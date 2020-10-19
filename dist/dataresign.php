@@ -109,7 +109,7 @@ include "uiheader.php";
                                                 <i class="fas fa-eye fa-fw mr-1"></i>Info Karyawan</a>
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="ubahsp?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahresign?id=<?php echo $tabel['no']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
@@ -141,7 +141,7 @@ include "uiheader.php";
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapussp?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapusresign?id=<?php echo $tabel['no']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>

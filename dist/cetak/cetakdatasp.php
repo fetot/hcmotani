@@ -65,6 +65,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="../datakaryawan">Karyawan</a>
+                                    <a class="nav-link" href="../datahubkel">Hubungan Keluarga</a>
                                     <a class="nav-link" href="../datasp">SP</a>
                                     <a class="nav-link" href="../datacuti">Cuti</a>
                                     <a class="nav-link" href="../dataresign">Resign</a>
@@ -78,6 +79,7 @@
                             <div class="collapse" id="tambahData" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="../tambahkaryawan">Karyawan</a>
+                                    <a class="nav-link" href="../tambahhubkel">Hubungan Keluarga</a>
                                     <a class="nav-link" href="../tambahsp">SP</a>
                                     <a class="nav-link" href="../tambahcuti">Cuti</a>
                                     <a class="nav-link" href="../tambahresign">Resign</a>

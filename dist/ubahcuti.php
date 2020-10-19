@@ -1,11 +1,12 @@
 <?php 
   include "uiheader.php";
-  if(empty($_GET['inputID'])){
-    $keyword = "";
+  if(empty($_GET['id'])){
+    $no = '1';
+    echo "<script>alert('Silahkan pilih Data Cuti yang ingin diubah!')</script>";
+    echo "<script>location='datacuti'</script>";
   }else{
-    $keyword = $_GET['inputID'];
+    $no = $_GET['id'];
   }
-
 ?>
 
 <main>
@@ -27,21 +28,22 @@
 
                             
                         <?php 
-                            $tampil = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan='$keyword'");
+                            $tampil = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.no='$no'");
                             $tabel = $tampil -> fetch_assoc();
-                            $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$keyword'");
+                            $idkaryawan = $tabel['id_karyawan'];
+                            $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$idkaryawan'");
                             $tabel2 = $tampil2 -> fetch_assoc();
                         ?>
 
 
 <table class="table table-sm table-borderless p-2">
-<form method="post" action="ubahcuti?inputID=<?php echo $keyword; ?>" name="form1">
+<form method="post" action="ubahcuti?id=<?php echo $no; ?>" name="form1">
   <tbody style="font-size: 0.9rem">
   
   <tr>
       <th scope="row">ID Karyawan</th>
       <td>
-          <input type="text" id="inputID" name="inputID" class="form-control form-control-sm mb-1" placeholder="ID Karyawan" value="<?php echo $tabel['id_karyawan']; ?>" autocomplete="off" required disabled>
+          <input type="text" id="inputID" name="inputID" class="form-control form-control-sm mb-1" placeholder="ID Karyawan" value="<?php echo $idkaryawan; ?>" autocomplete="off" required disabled>
       </td>
     </tr>
 
@@ -123,6 +125,7 @@
         $tglcuti = $_POST['inputTglIzinCuti'];
         $tglakhir = $_POST['inputTglAkhirCuti'];
         $alasan = $_POST['inputAlasan'];
+        $idkaryawan = $tabel['id_karyawan'];
 
         $hariini = date('Y-m-d');
         $hariini_time = strtotime($hariini);
@@ -130,7 +133,7 @@
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "UPDATE tbl_cuti SET tgl_izincuti='$tglcuti',tgl_akhircuti='$tglakhir',alasan='$alasan',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+        $query1 = mysqli_query($koneksi, "UPDATE tbl_cuti SET tgl_izincuti='$tglcuti',tgl_akhircuti='$tglakhir',alasan='$alasan',terakhirdiubah=CURRENT_TIMESTAMP() WHERE no=$no");
 
         if($query1){
             echo "<script>alert('Data Cuti berhasil diubah!')</script>";
@@ -138,9 +141,9 @@
 
             //jika tanggal akhir cuti > tanggal hari ini maka status karyawan menjadi cuti
             if($akhircuti_time > $hariini_time){
-              $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Cuti',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+              $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Cuti',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$idkaryawan");
           }else{
-            $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Aktif',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+            $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Aktif',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$idkaryawan");
           }
         }
     }

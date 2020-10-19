@@ -66,19 +66,24 @@ include "uiheader.php";
                         <tbody>
                             <?php 
                                                 $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_hubkel, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_hubkel.id_karyawan AND tbl_infokaryawan.id_karyawan = tbl_hubkel.id_karyawan");
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_hubkel");
                                                 while($tabel = $tampil -> fetch_assoc()){
-                                                     $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel, tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = tbl_hubkel.id_karyawan_rel AND tbl_infokaryawan.id_karyawan = tbl_hubkel.id_karyawan_rel");
+                                                    $id = $tabel['id'];
+                                                    $idkar = $tabel['id_karyawan'];
+                                                    $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkar AND tbl_infokaryawan.id_karyawan = $idkar");
                                                      $tabel2 = $tampil2 -> fetch_assoc();
+                                                    $idkar2 = $tabel['id_karyawan_rel'];
+                                                     $tampil3 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkar2 AND tbl_infokaryawan.id_karyawan = $idkar2");
+                                                     $tabel3 = $tampil3 -> fetch_assoc();
                                             ?>
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
-                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel['nama']; ?></a></td>
-                                <td class="text-center"><?php echo $tabel['bagian']; ?></td>
-                                <td class="text-center"><?php echo $tabel2['id_karyawan_rel']; ?></td>
-                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan_rel']; ?>"><?php echo $tabel2['nama']; ?></a></td>
+                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel2['nama']; ?></a></td>
                                 <td class="text-center"><?php echo $tabel2['bagian']; ?></td>
+                                <td class="text-center"><?php echo $tabel['id_karyawan_rel']; ?></td>
+                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan_rel']; ?>"><?php echo $tabel3['nama']; ?></a></td>
+                                <td class="text-center"><?php echo $tabel3['bagian']; ?></td>
                                 <td class="text-center"><?php echo $tabel['hubungan']; ?></td>
                                 <td>
                                     <div class="dropdown show">
@@ -96,13 +101,13 @@ include "uiheader.php";
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="ubahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahhubkel?id=<?php echo $tabel['id']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
                                                 data-toggle="modal"
                                                 data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Cuti</button>
+                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
                                         </div>
                                     </div>
 
@@ -128,7 +133,7 @@ include "uiheader.php";
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapushubkel?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapushubkel?id=<?php echo $tabel['id']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>

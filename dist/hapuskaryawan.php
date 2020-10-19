@@ -1,4 +1,9 @@
 <?php
+if(empty($_GET['id'])){
+  echo "<script>alert('Silahkan pilih Data Karyawan yang ingin dihapus!')</script>";
+  echo "<script>location='datakaryawan'</script>";
+
+  }else{
   $id = $_GET['id'];
 
     include_once("koneksi.php");
@@ -16,4 +21,5 @@
     } else {
         var_dump($queryhapus);echo "query1";
     }
+  }
 ?>

@@ -149,12 +149,16 @@
         $ket = $_POST['inputKet'];
         
     
-        include_once("koneksi.php");
-    
-        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+        if(!empty($idkaryawan)){
+          include_once("koneksi.php");
+          $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
 
-        echo "<script>alert('SP berhasil ditambahkan!')</script>";
-        echo "<script>location='datasp'</script>";
+          echo "<script>alert('SP berhasil ditambahkan!')</script>";
+          echo "<script>location='datasp'</script>";
+        }else{
+          echo "<script>alert('ID Karyawan tidak boleh kosong!')</script>";
+          echo "<script>location='tambahsp'</script>";
+        }
     }
 ?>
 

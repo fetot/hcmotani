@@ -100,7 +100,9 @@ include "uiheader.php";
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
-                                <td><?php echo $tabel['nama']; ?></td>
+                                <td><a
+                                                style="color: black;"
+                                                href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel['nama']; ?></a></td>
                                 <td class="text-center"><?php echo $tabel['bagian']; ?></td>
                                 <td class="text-center"><?php echo $tabel['jenissp']; ?></td>
                                 <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_sp'])); ?></td>
@@ -125,7 +127,7 @@ include "uiheader.php";
                                                 <i class="fas fa-eye fa-fw mr-1"></i>Info Karyawan</a>
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="ubahsp?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahsp?id=<?php echo $tabel['no']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
@@ -157,7 +159,7 @@ include "uiheader.php";
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapussp?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapussp?id=<?php echo $tabel['no']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>

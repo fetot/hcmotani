@@ -64,29 +64,22 @@
       </td>
     </tr>
     <?php endif ?>
-
-    <tr>
-      <th scope="row">Dengan ID Karyawan</th>
-      <td>
-        <form method="GET" action="" >
-          <div class="input-group">
-          <input type="text" id="inputID2" name="inputID2" class="form-control form-control-sm mb-1" placeholder="Dengan ID Karyawan" autocomplete="off" required autofocus>
-            <div class="input-group-append">
-              <button class="btn btn-sm btn-primary mb-1" name="Cari2" id="btnCari2" type="submit" ><i class="fas fa-search fa-fw mr-1"></i></button>
-            </div>
-          </div>
-        </form>
-      </td>
-    </tr>
     
 
     <tr>
         <th scope="row" colspan="3"><hr></th>
     </tr>
 
-    <form method="post" action="tambahsp" name="form1">
+    <form method="post" action="tambahhubkel" name="form1">
     <input type="hidden" name="aidi" value="<?php echo $keyword; ?>" readonly="true" autocomplete="off" required="">
-    <input type="hidden" name="aidi2" value="<?php echo $keyword2; ?>" readonly="true" autocomplete="off" required="">
+    <tr>
+      <th scope="row">Dengan ID Karyawan</th>
+      <td>
+          <div class="input-group">
+          <input type="text" id="inputID2" name="inputID2" class="form-control form-control-sm mb-1" placeholder="Dengan ID Karyawan" autocomplete="off" required autofocus>
+          </div>
+      </td>
+    </tr>
 
     <tr>
       <th scope="row">Hubungan</th>
@@ -130,17 +123,19 @@
 <?php
     if(isset($_POST['Submit'])){
         $idkaryawan = $_POST['aidi'];
-        $tglsp = $_POST['inputTglSP'];
-        $jenissp = $_POST['jenissp'];
-        $ket = $_POST['inputKet'];
+        $denganid = $_POST['inputID2'];
+        $hubungan = $_POST['inputHub'];
         
-    
-        include_once("koneksi.php");
-    
-        $query1 = mysqli_query($koneksi, "INSERT INTO tbl_sp (id_karyawan,tgl_sp,jenissp,keterangan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$tglsp','$jenissp','$ket',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
+        if(!empty($idkaryawan)){
+          include_once("koneksi.php");
+          $query1 = mysqli_query($koneksi, "INSERT INTO tbl_hubkel (id_karyawan,id_karyawan_rel,hubungan,waktudibuat,terakhirdiubah) VALUES ('$idkaryawan','$denganid','$hubungan',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())");
 
-        echo "<script>alert('SP berhasil ditambahkan!')</script>";
-        echo "<script>location='datasp'</script>";
+          echo "<script>alert('Hubungan Keluarga berhasil ditambahkan!')</script>";
+          echo "<script>location='datahubkel'</script>";
+        }else{
+          echo "<script>alert('ID Karyawan tidak boleh kosong!')</script>";
+          echo "<script>location='tambahhubkel'</script>";
+        }
     }
 ?>
 

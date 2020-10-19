@@ -36,7 +36,7 @@ $id = $_GET['id'];
                             class="dropdown-item text-primary">
                             <i class="fas fa-check fa-fw mr-1"></i>Izin Cuti</a>
                         <a
-                            href="tambahhubkel?id=<?php echo $tabel['id_karyawan']; ?>&Cari="
+                            href="tambahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
                             class="dropdown-item text-primary">
                             <i class="fas fa-plus fa-fw mr-1"></i>Hubungan Keluarga</a>
                         <a
@@ -98,7 +98,7 @@ $id = $_GET['id'];
 
                             if ($queryhapus2) {
                               echo "<script>alert('Data Karyawan berhasil dihapus!')</script>";
-                              echo "<script>location='index'</script>";
+                              echo "<script>location='datakaryawan'</script>";
                               
                             } else {
                                 var_dump($queryhapus2);
@@ -117,7 +117,7 @@ $id = $_GET['id'];
                 <li class="breadcrumb-item">
                     <a href="datakaryawan">Tampil Data Karyawan</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Info Karyawan</li>
+                <li class="breadcrumb-item active" aria-current="page">Info Karyawan [<?php echo $tabel['id_karyawan']; echo "/"; echo $tabel['nama'];echo "/";echo $tabel['bagian']; ?>]</li>
             </ol>
         </nav>
 
@@ -501,14 +501,14 @@ $id = $_GET['id'];
                                                 while($tabel = $tampil -> fetch_assoc()){ 
                                                      if($tabel['id_karyawan'] == $id){
                                                         $idkar = $tabel['id_karyawan_rel'];
-                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan, tbl_masterkaryawan WHERE tbl_infokaryawan.id_karyawan = $idkar");
+                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan, tbl_masterkaryawan WHERE tbl_infokaryawan.id_karyawan = $idkar AND tbl_masterkaryawan.id_karyawan = $idkar");
                                                         $tabel2 = $tampil2 -> fetch_assoc();
                                                         $nama = $tabel2['nama'];
                                                         $bagian = $tabel2['bagian']; 
                                                      }
                                                      elseif($tabel['id_karyawan_rel'] == $id){
                                                         $idkar = $tabel['id_karyawan'];
-                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkar");
+                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkar AND tbl_infokaryawan.id_karyawan = $idkar");
                                                         $tabel2 = $tampil2 -> fetch_assoc();
                                                         $nama = $tabel2['nama'];
                                                         $bagian = $tabel2['bagian'];
@@ -538,13 +538,13 @@ $id = $_GET['id'];
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="ubahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahhubkel?id=<?php echo $tabel['id']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
                                                 data-toggle="modal"
                                                 data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Cuti</button>
+                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
                                         </div>
                                     </div>
 
@@ -570,7 +570,7 @@ $id = $_GET['id'];
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapushubkel?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapushubkel?id=<?php echo $tabel['id']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>
@@ -644,7 +644,7 @@ $id = $_GET['id'];
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="ubahsp?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahsp?id=<?php echo $tabel['no']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
@@ -676,7 +676,7 @@ $id = $_GET['id'];
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapussp?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapussp?id=<?php echo $tabel['no']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>
@@ -748,7 +748,7 @@ $id = $_GET['id'];
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="ubahcuti?inputID=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="ubahcuti?id=<?php echo $tabel['no']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                                             <button
                                                 class="dropdown-item text-danger"
@@ -780,7 +780,7 @@ $id = $_GET['id'];
                                                 </div>
                                                 <div class="modal-footer">
                                                     <a
-                                                        href="hapuscuti?id=<?php echo $tabel['id_karyawan']; ?>"
+                                                        href="hapuscuti?id=<?php echo $tabel['no']; ?>"
                                                         class="btn btn-danger">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>

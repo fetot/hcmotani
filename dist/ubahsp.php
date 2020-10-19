@@ -1,9 +1,11 @@
 <?php 
   include "uiheader.php";
-  if(empty($_GET['inputID'])){
-    $keyword = "";
+  if(empty($_GET['id'])){
+    $no = '1';
+    echo "<script>alert('Silahkan pilih Data SP yang ingin diubah!')</script>";
+    echo "<script>location='datasp'</script>";
   }else{
-    $keyword = $_GET['inputID'];
+    $no = $_GET['id'];
   }
 
 ?>
@@ -27,15 +29,16 @@
 
                             
                         <?php 
-                            $tampil = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan='$keyword'");
+                            $tampil = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.no='$no'");
                             $tabel = $tampil -> fetch_assoc();
-                            $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$keyword'");
+                            $idkaryawan = $tabel['id_karyawan'];
+                            $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$idkaryawan'");
                             $tabel2 = $tampil2 -> fetch_assoc();
                         ?>
 
 
 <table class="table table-sm table-borderless p-2">
-<form method="post" action="ubahsp?inputID=<?php echo $keyword; ?>" name="form1">
+<form method="post" action="ubahsp?id=<?php echo $no; ?>" name="form1">
   <tbody style="font-size: 0.9rem">
   
   <tr>
@@ -137,7 +140,7 @@
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "UPDATE tbl_sp SET tgl_sp='$tglsp',jenissp='$jenissp',keterangan='$ket',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$keyword");
+        $query1 = mysqli_query($koneksi, "UPDATE tbl_sp SET tgl_sp='$tglsp',jenissp='$jenissp',keterangan='$ket',terakhirdiubah=CURRENT_TIMESTAMP() WHERE no=$no");
 
         if($query1){
             echo "<script>alert('Data SP berhasil diubah!')</script>";
