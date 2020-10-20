@@ -85,7 +85,7 @@ include "uiheader.php";
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
-                                <td><?php echo $tabel['nama']; ?></td>
+                                <td><a href="detailres?id=<?php echo $tabel['id_karyawan']; ?>" style="color:black;"><?php echo $tabel['nama']; ?></td>
                                 <td class="text-center"><?php echo $tabel['bagian']; ?></td>
                                 <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_resign'])); ?></td>
                                 <td><?php echo $tabel['alasan']; ?></td>
@@ -105,7 +105,7 @@ include "uiheader.php";
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a
                                                 class="dropdown-item text-primary"
-                                                href="detail?id=<?php echo $tabel['id_karyawan']; ?>">
+                                                href="detailres?id=<?php echo $tabel['id_karyawan']; ?>">
                                                 <i class="fas fa-eye fa-fw mr-1"></i>Info Karyawan</a>
                                             <a
                                                 class="dropdown-item text-primary"

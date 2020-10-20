@@ -4,13 +4,11 @@ include "uiheader.php";
 
 <main>
     <div class="container-fluid">
-    <div class="row mt-4 align-items-center">
+        <div class="row mt-4 align-items-center">
             <h1 class="col-md-3">Tampil Data</h1>
             <div class="btn-toolbar col-md-3 offset-md-6 justify-content-end">
                 <div class="btn-group ml-2">
-                    <a
-                        href="cetak/cetakdatahubkel"
-                        class="btn btn-outline-secondary">
+                    <a href="cetak/cetakdatahubkel" class="btn btn-outline-secondary">
                         <i class="fas fa-print fa-fw mr-1"></i>Cetak/Eksport</a>
                 </div>
 
@@ -79,10 +77,14 @@ include "uiheader.php";
                             <tr>
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan']; ?></td>
-                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel2['nama']; ?></a></td>
+                                <td>
+                                    <a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan']; ?>"><?php echo $tabel2['nama']; ?></a>
+                                </td>
                                 <td class="text-center"><?php echo $tabel2['bagian']; ?></td>
                                 <td class="text-center"><?php echo $tabel['id_karyawan_rel']; ?></td>
-                                <td><a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan_rel']; ?>"><?php echo $tabel3['nama']; ?></a></td>
+                                <td>
+                                    <a class="text-dark" href="detail?id=<?php echo $tabel['id_karyawan_rel']; ?>"><?php echo $tabel3['nama']; ?></a>
+                                </td>
                                 <td class="text-center"><?php echo $tabel3['bagian']; ?></td>
                                 <td class="text-center"><?php echo $tabel['hubungan']; ?></td>
                                 <td>
@@ -103,11 +105,14 @@ include "uiheader.php";
                                                 class="dropdown-item text-primary"
                                                 href="ubahhubkel?id=<?php echo $tabel['id']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                                            <button
+                                            <!-- <a
                                                 class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
+                                                href="hapushubkel?id=<?php echo $tabel['id'] ?>">
+                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</a> -->
+
+                                            <button class="dropdown-item text-danger" data-toggle="modal"
+                                            data-target="#modalDelKonfirmasi"> <i class="fas fa-trash-alt fa-fw
+                                            mr-1"></i>Hapus</button>
                                         </div>
                                     </div>
 
@@ -132,20 +137,19 @@ include "uiheader.php";
                                                     dikembalikan.
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a
-                                                        href="hapushubkel?id=<?php echo $tabel['id']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
+                                                    <a class="btn btn-danger btn-ok" href="hapushubkel?id=<?php echo $tabel['id']; ?>">Hapus</a>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- end modal -->
+                                    
 
                                 </td>
                             </tr>
                             <?php $nomor++; ?>
-                                                <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -153,5 +157,13 @@ include "uiheader.php";
         </div>
     </div>
 </main>
+
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('#modalDelKonfirmasi').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    });
+</script> -->
 
 <?php include "footer.php"; ?>

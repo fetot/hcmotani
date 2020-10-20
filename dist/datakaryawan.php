@@ -145,6 +145,10 @@
                                                 href="tambahsp?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
                                                 class="dropdown-item text-warning">
                                                 <i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
+                                            <a
+                                                href="tambahresign?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
+                                                class="dropdown-item text-danger">
+                                                <i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Resign</a>
                                             <button
                                                 class="dropdown-item text-danger"
                                                 data-toggle="modal"

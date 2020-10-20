@@ -40,7 +40,7 @@
 
 
 <table class="table table-sm table-borderless p-2">
-<form method="post" action="ubahcuti?id=<?php echo $id; ?>" name="form1">
+<form method="post" action="ubahhubkel?id=<?php echo $id; ?>" name="form1">
   <tbody style="font-size: 0.9rem">
   
   <tr>
@@ -137,29 +137,17 @@
 
 <?php
     if(isset($_POST['Submit'])){
-        $tglcuti = $_POST['inputTglIzinCuti'];
-        $tglakhir = $_POST['inputTglAkhirCuti'];
-        $alasan = $_POST['inputAlasan'];
-        $idkaryawan = $tabel['id_karyawan'];
-
-        $hariini = date('Y-m-d');
-        $hariini_time = strtotime($hariini);
-        $akhircuti_time = strtotime($tglakhir);
+        $hubungan = $_POST['inputHub'];
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "UPDATE tbl_cuti SET tgl_izincuti='$tglcuti',tgl_akhircuti='$tglakhir',alasan='$alasan',terakhirdiubah=CURRENT_TIMESTAMP() WHERE no=$no");
+        $query1 = mysqli_query($koneksi, "UPDATE tbl_hubkel SET hubungan='$hubungan',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id=$id");
 
         if($query1){
-            echo "<script>alert('Data Cuti berhasil diubah!')</script>";
-            echo "<script>location='datacuti'</script>";
-
-            //jika tanggal akhir cuti > tanggal hari ini maka status karyawan menjadi cuti
-            if($akhircuti_time > $hariini_time){
-              $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Cuti',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$idkaryawan");
-          }else{
-            $query2 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET status='Aktif',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$idkaryawan");
-          }
+            echo "<script>alert('Data Hubungan Keluarga berhasil diubah!')</script>";
+            echo "<script>location='datahubkel'</script>";
+        }else{
+            var_dump($query1);
         }
     }
 ?>

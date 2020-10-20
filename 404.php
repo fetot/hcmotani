@@ -17,7 +17,7 @@
         setTimeout(function () {
         window.location.href= '/hcmotani/'; // the redirect goes here
 
-        },3500); //duration
+        },3000); //duration
     </script>
         <div id="layoutError">
             <div id="layoutError_content">

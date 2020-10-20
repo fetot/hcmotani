@@ -44,7 +44,7 @@ include "uiheader.php";
                                 <div class="card border-warning text-warning">
                                     <div class="card-body align-items-center justify-content-center">
                                         <h1 class="font-weight-bolder"><?php
-                                                $datasp = $koneksi -> query("SELECT * FROM tbl_sp");
+                                                $datasp = $koneksi -> query("SELECT DISTINCT id_karyawan FROM tbl_sp");
                                                 $jlhsp = mysqli_num_rows($datasp);
                                                 echo $jlhsp;
                                         ?></h3>

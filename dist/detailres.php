@@ -1,8 +1,8 @@
 <?php 
 include "uiheader.php";
 if(empty($_GET['id'])){
-    echo "<script>alert('Silahkan pilih Data Karyawan terlebih dahulu!')</script>";
-    echo "<script>location='datakaryawan'</script>";
+    echo "<script>alert('Silahkan pilih Data Karyawan dari Data Resign terlebih dahulu!')</script>";
+    echo "<script>location='dataresign'</script>";
   
     }else{
     $id = $_GET['id'];
@@ -12,14 +12,14 @@ if(empty($_GET['id'])){
 <main>
 
     <?php 
-                            $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                            $tampil = $koneksi -> query("SELECT * FROM tbl_resign JOIN tbl_infokaryawan_res ON tbl_infokaryawan_res.id_karyawan = tbl_resign.id_karyawan WHERE tbl_infokaryawan_res.id_karyawan='$id'");
                             $tabel = $tampil -> fetch_assoc();
                         ?>
 
     <div class="container-fluid">
         <div class="row mt-4 align-items-center">
-            <h1 class="col-md-4">Info Karyawan</h1>
-            <div class="btn-toolbar col-md-3 offset-md-5 justify-content-end">
+            <h1 class="col-md-8">Info Karyawan (Sudah Resign)</h1>
+            <div class="btn-toolbar col-md-3 offset-md-1 justify-content-end">
                 <div class="dropdown">
                     <a
                         class="btn btn-outline-secondary dropdown-toggle"
@@ -37,28 +37,6 @@ if(empty($_GET['id'])){
                             href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>"
                             class="dropdown-item text-primary">
                             <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                        <a
-                            href="tambahcuti?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
-                            class="dropdown-item text-primary">
-                            <i class="fas fa-check fa-fw mr-1"></i>Izin Cuti</a>
-                        <a
-                            href="tambahhubkel?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
-                            class="dropdown-item text-primary">
-                            <i class="fas fa-plus fa-fw mr-1"></i>Hubungan Keluarga</a>
-                        <a
-                            href="tambahsp?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
-                            class="dropdown-item text-warning">
-                            <i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Beri SP</a>
-                        <a
-                                                href="tambahresign?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
-                                                class="dropdown-item text-danger">
-                                                <i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Resign</a>
-                        <a
-                            href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>"
-                            data-toggle="modal"
-                            data-target="#modalDelKonfirmasi"
-                            class="dropdown-item text-danger">
-                            <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a>
                     </div>
                 </div>
                 <div class="btn-group ml-2">
@@ -69,55 +47,6 @@ if(empty($_GET['id'])){
             </div>
         </div>
 
-        <!-- modal delete -->
-        <div
-            class="modal fade"
-            id="modalDelKonfirmasi"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                        dikembalikan.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" name="Hapus" id="btnTambah" class="btn btn-danger">Hapus</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end modal -->
-
-    <?php
-                        if(isset($_POST['Hapus'])){
-                          include_once("koneksi.php");
-
-                          $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_masterkaryawan WHERE id_karyawan=$id");
-                          if($queryhapus){
-                            $queryhapus2 = mysqli_query($koneksi, "DELETE FROM tbl_infokaryawan WHERE id=$id");
-
-                            if ($queryhapus2) {
-                              echo "<script>alert('Data Karyawan berhasil dihapus!')</script>";
-                              echo "<script>location='datakaryawan'</script>";
-                              
-                            } else {
-                                var_dump($queryhapus2);
-                            }
-                          } else {
-                              var_dump($queryhapus);echo "query1";
-                          }
-                        }
-                      ?>
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -125,22 +54,22 @@ if(empty($_GET['id'])){
                     <a href="index">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="datakaryawan">Tampil Data Karyawan</a>
+                    <a href="dataresign">Tampil Data Resign</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Info Karyawan [<?php echo $tabel['id_karyawan']; echo "/"; echo $tabel['nama'];echo "/";echo $tabel['bagian']; ?>]</li>
+                <li class="breadcrumb-item active" aria-current="page">Info Karyawan (Resign) [<?php echo $tabel['id_karyawan']; echo "/"; echo $tabel['nama'];echo "/";echo $tabel['bagian']; ?>]</li>
             </ol>
         </nav>
 
         <?php 
-            $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel WHERE tbl_hubkel.id_karyawan='$id' OR tbl_hubkel.id_karyawan_rel='$id'");
+            $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel_res WHERE tbl_hubkel_res.id_karyawan='$id' OR tbl_hubkel_res.id_karyawan_rel='$id'");
             $jlhhubkel = mysqli_num_rows($tampil2);
             $tabel2 = $tampil2 -> fetch_assoc();
 
-            $tampil3 = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan='$id'");
+            $tampil3 = $koneksi -> query("SELECT * FROM tbl_sp_res WHERE tbl_sp_res.id_karyawan='$id'");
             $jlhsp = mysqli_num_rows($tampil3);
             $tabel3 = $tampil3 -> fetch_assoc();
 
-            $tampil4 = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan='$id'");
+            $tampil4 = $koneksi -> query("SELECT * FROM tbl_cuti_res WHERE tbl_cuti_res.id_karyawan='$id'");
             $jlhcuti = mysqli_num_rows($tampil4);
             $tabel4 = $tampil4 -> fetch_assoc();
 
@@ -297,7 +226,7 @@ if(empty($_GET['id'])){
                                             required="required">
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th scope="row">Status</th>
                                     <td>
                                         <input
@@ -310,7 +239,7 @@ if(empty($_GET['id'])){
                                             autofocus="autofocus"
                                             disabled="disabled">
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <th scope="row" colspan="3"><hr></th>
                                 </tr>
@@ -491,24 +420,30 @@ if(empty($_GET['id'])){
                                 <th>Dengan Nama</th>
                                 <th>Dari Bagian</th>
                                 <th>Hubungan</th>
-                                <th></th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr class="text-center">
+                                <th>No</th>
+                                <th>Dengan ID</th>
+                                <th>Dengan Nama</th>
+                                <th>Dari Bagian</th>
+                                <th>Hubungan</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                         <?php 
                                                 $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_hubkel WHERE tbl_hubkel.id_karyawan = $id OR tbl_hubkel.id_karyawan_rel = $id");
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_hubkel_res WHERE tbl_hubkel_res.id_karyawan = $id OR tbl_hubkel_res.id_karyawan_rel = $id");
                                                 while($tabel = $tampil -> fetch_assoc()){ 
                                                      if($tabel['id_karyawan'] == $id){
                                                         $idkar = $tabel['id_karyawan_rel'];
-                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan, tbl_masterkaryawan WHERE tbl_infokaryawan.id_karyawan = $idkar AND tbl_masterkaryawan.id_karyawan = $idkar");
-                                                        $tabel2 = $tampil2 -> fetch_assoc();
-                                                        $nama = $tabel2['nama'];
-                                                        $bagian = $tabel2['bagian']; 
+                                                        $nama = $tabel['relnama'];
+                                                        $bagian = $tabel['relbagian']; 
                                                      }
                                                      elseif($tabel['id_karyawan_rel'] == $id){
                                                         $idkar = $tabel['id_karyawan'];
-                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkar AND tbl_infokaryawan.id_karyawan = $idkar");
+                                                        $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan_res WHERE tbl_infokaryawan_res.id_karyawan = $idkar");
                                                         $tabel2 = $tampil2 -> fetch_assoc();
                                                         $nama = $tabel2['nama'];
                                                         $bagian = $tabel2['bagian'];
@@ -518,7 +453,7 @@ if(empty($_GET['id'])){
                                 <td class="text-center"><?php echo $nomor; ?></td>
                                 <td class="text-center"><?php echo $idkar; ?></td>
                                 <td>
-                                <?php
+                                    <?php
                                         $searchkar = $koneksi -> query("SELECT * FROM tbl_masterkaryawan WHERE id_karyawan = $idkar");
                                         $kar = $searchkar -> fetch_assoc();
                                         if(empty($kar)){
@@ -531,64 +466,6 @@ if(empty($_GET['id'])){
                                 </td>
                                 <td class="text-center"><?php echo $bagian; ?></td>
                                 <td class="text-center"><?php echo $tabel['hubungan']; ?></td>
-                                <td>
-                                    <div class="dropdown show">
-                                        <a
-                                            class="btn btn-secondary dropdown-toggle"
-                                            href="#"
-                                            role="button"
-                                            id="dropdownMenuLink"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Opsi
-                                        </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a
-                                                class="dropdown-item text-primary"
-                                                href="ubahhubkel?id=<?php echo $tabel['id']; ?>">
-                                                <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                                            <button
-                                                class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- modal delete -->
-                                    <div
-                                        class="modal fade"
-                                        id="modalDelKonfirmasi"
-                                        tabindex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                                                    dikembalikan.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a
-                                                        href="hapushubkel?id=<?php echo $tabel['id']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end modal -->
-
-                                </td>
                             </tr>
                             <?php $nomor++; ?>
                             <?php } ?>
@@ -617,15 +494,14 @@ if(empty($_GET['id'])){
                                 <th>SP</th>
                                 <th>Tanggal Diberikan SP</th>
                                 <th>Keterangan</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                                                 $nomor = 1;
-                                                $tampil = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan = $id");
+                                                $tampil = $koneksi -> query("SELECT * FROM tbl_sp_res WHERE tbl_sp_res.id_karyawan = $id");
                                                 while($tabel = $tampil -> fetch_assoc()){
-                                                     $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                                                     $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan_res WHERE tbl_infokaryawan_res.id_karyawan='$id'");
                                                      $tabel2 = $tampil2 -> fetch_assoc();
                                                     
                                             ?>
@@ -637,64 +513,6 @@ if(empty($_GET['id'])){
                                 <td class="text-center"><?php echo $tabel['jenissp']; ?></td>
                                 <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_sp'])); ?></td>
                                 <td><?php echo $tabel['keterangan']; ?></td>
-                                <td>
-                                    <div class="dropdown show">
-                                        <a
-                                            class="btn btn-secondary dropdown-toggle"
-                                            href="#"
-                                            role="button"
-                                            id="dropdownMenuLink"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Opsi
-                                        </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a
-                                                class="dropdown-item text-primary"
-                                                href="ubahsp?id=<?php echo $tabel['no']; ?>">
-                                                <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                                            <button
-                                                class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus SP</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- modal delete -->
-                                    <div
-                                        class="modal fade"
-                                        id="modalDelKonfirmasi"
-                                        tabindex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                                                    dikembalikan.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a
-                                                        href="hapussp?id=<?php echo $tabel['no']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end modal -->
-
-                                </td>
                             </tr>
                             <?php $nomor++; ?>
                             <?php } ?>
@@ -722,15 +540,14 @@ if(empty($_GET['id'])){
                                 <th>Izin Cuti</th>
                                 <th>Cuti Sampai</th>
                                 <th>Alasan</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                                 $nomor = 1;
-                                $tampil = $koneksi -> query("SELECT * FROM tbl_cuti WHERE tbl_cuti.id_karyawan = $id");
+                                $tampil = $koneksi -> query("SELECT * FROM tbl_cuti_res WHERE tbl_cuti_res.id_karyawan = $id");
                                 while($tabel = $tampil -> fetch_assoc()){
-                                    $tampil2 = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                                    $tampil2 = $koneksi -> query("SELECT * FROM tbl_infokaryawan_res WHERE tbl_infokaryawan_res.id_karyawan='$id'");
                                     $tabel2 = $tampil2 -> fetch_assoc();
                         ?>
                             <tr>
@@ -741,64 +558,6 @@ if(empty($_GET['id'])){
                                 <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_izincuti'])); ?></td>
                                 <td class="text-center"><?php echo date("d-M-Y", strtotime($tabel['tgl_akhircuti'])); ?></td>
                                 <td><?php echo $tabel['alasan']; ?></td>
-                                <td>
-                                    <div class="dropdown show">
-                                        <a
-                                            class="btn btn-secondary dropdown-toggle"
-                                            href="#"
-                                            role="button"
-                                            id="dropdownMenuLink"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Opsi
-                                        </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a
-                                                class="dropdown-item text-primary"
-                                                href="ubahcuti?id=<?php echo $tabel['no']; ?>">
-                                                <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                                            <button
-                                                class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Cuti</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- modal delete -->
-                                    <div
-                                        class="modal fade"
-                                        id="modalDelKonfirmasi"
-                                        tabindex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                                                    dikembalikan.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a
-                                                        href="hapuscuti?id=<?php echo $tabel['no']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end modal -->
-
-                                </td>
                             </tr>
                             <?php $nomor++; ?>
                             <?php } ?>
