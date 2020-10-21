@@ -13,11 +13,11 @@
 <script src="../bootstrap/js/bootstrap.min.js">
 $('#myModal').on('shown.bs.modal', function () {
 $('#myInput').trigger('focus')
-})
+});
 
 $(function () {
 $('[data-toggle="tooltip"]').tooltip()
-})
+});
 </script>
 <script type="text/javascript" src="assets/datatables.js"></script>
 <script type="text/javascript" src="js/datatables.js"></script>

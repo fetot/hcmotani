@@ -34,7 +34,7 @@ if(empty($_GET['id'])){
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a
-                            href="ubahkaryawan?id=<?php echo $tabel['id_karyawan']; ?>"
+                            href="ubahkaryawanres?id=<?php echo $tabel['id_karyawan']; ?>"
                             class="dropdown-item text-primary">
                             <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
                     </div>
@@ -61,9 +61,9 @@ if(empty($_GET['id'])){
         </nav>
 
         <?php 
-            $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel_res WHERE tbl_hubkel_res.id_karyawan='$id' OR tbl_hubkel_res.id_karyawan_rel='$id'");
-            $jlhhubkel = mysqli_num_rows($tampil2);
-            $tabel2 = $tampil2 -> fetch_assoc();
+            // $tampil2 = $koneksi -> query("SELECT * FROM tbl_hubkel_res WHERE tbl_hubkel_res.id_karyawan='$id' OR tbl_hubkel_res.id_karyawan_rel='$id'");
+            // $jlhhubkel = mysqli_num_rows($tampil2);
+            // $tabel2 = $tampil2 -> fetch_assoc();
 
             $tampil3 = $koneksi -> query("SELECT * FROM tbl_sp_res WHERE tbl_sp_res.id_karyawan='$id'");
             $jlhsp = mysqli_num_rows($tampil3);
@@ -91,7 +91,7 @@ if(empty($_GET['id'])){
                             Info Karyawan
                         </a>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <a
                             class="nav-link"
                             id="hubkel-tab"
@@ -103,7 +103,7 @@ if(empty($_GET['id'])){
                             <i class="fas fa-user-friends mr-1"></i>
                             Hubungan Keluarga<span class="badge badge-warning ml-1"><?php echo $jlhhubkel; ?></span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item" role="presentation">
                         <a
                             class="nav-link"
@@ -404,7 +404,7 @@ if(empty($_GET['id'])){
                 </div>
                 <!-- end tab info karyawan -->
                 <!-- tab hubungan keluarga -->
-                <div
+                <!-- <div
                     class="tab-pane fade table-reponsive"
                     id="hubkel"
                     role="tabpanel"
@@ -473,7 +473,7 @@ if(empty($_GET['id'])){
                     </table>
                     <?php endif ?>
 
-                </div>
+                </div> -->
                 <!-- end tab hubungan keluarga -->
                 <!-- tab riwayat sp -->
                 <div

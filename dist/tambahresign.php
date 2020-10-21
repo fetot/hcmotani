@@ -204,7 +204,7 @@
                 if($tglresign_time <= $hariini_time){
             
                     //memindahkan datakaryawan ke dalam tbl_infokaryawan_res
-                    $query2 = mysqli_query($koneksi, "INSERT INTO tbl_infokaryawan_res(id_karyawan,nama,bagian,badge,tgl_masukkerja,jenis_kelamin,ttl,alamat,agama,status_nikah,no_hp,pendidikan,nik,waktudibuat) SELECT tbl_masterkaryawan.id_karyawan,tbl_infokaryawan.nama,tbl_masterkaryawan.bagian,tbl_masterkaryawan.badge,tbl_masterkaryawan.tgl_masukkerja,tbl_infokaryawan.jenis_kelamin,tbl_infokaryawan.ttl,tbl_infokaryawan.alamat,tbl_infokaryawan.agama,tbl_infokaryawan.status_nikah,tbl_infokaryawan.no_hp,tbl_infokaryawan.pendidikan,tbl_infokaryawan.nik,tbl_infokaryawan.waktudibuat FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkaryawan AND tbl_infokaryawan.id_karyawan = $idkaryawan");
+                    $query2 = mysqli_query($koneksi, "INSERT INTO tbl_infokaryawan_res(id_karyawan,nama,bagian,badge,tgl_masukkerja,jenis_kelamin,ttl,alamat,agama,status_nikah,no_hp,pendidikan,nik,waktudibuat,terakhirdiubah) SELECT tbl_masterkaryawan.id_karyawan,tbl_infokaryawan.nama,tbl_masterkaryawan.bagian,tbl_masterkaryawan.badge,tbl_masterkaryawan.tgl_masukkerja,tbl_infokaryawan.jenis_kelamin,tbl_infokaryawan.ttl,tbl_infokaryawan.alamat,tbl_infokaryawan.agama,tbl_infokaryawan.status_nikah,tbl_infokaryawan.no_hp,tbl_infokaryawan.pendidikan,tbl_infokaryawan.nik,tbl_infokaryawan.waktudibuat,tbl_infokaryawan.terakhirdiubah FROM tbl_masterkaryawan, tbl_infokaryawan WHERE tbl_masterkaryawan.id_karyawan = $idkaryawan AND tbl_infokaryawan.id_karyawan = $idkaryawan");
                     if($query2){
                         $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_masterkaryawan WHERE id_karyawan=$idkaryawan");
                         $queryhapus2 = mysqli_query($koneksi, "DELETE FROM tbl_infokaryawan WHERE id=$idkaryawan");
@@ -214,10 +214,18 @@
                     $searchhub = $koneksi -> query("SELECT * FROM tbl_hubkel WHERE tbl_hubkel.id_karyawan='$idkaryawan'");
                     $tblhub = $searchhub -> fetch_assoc();
                     if(!empty($tblhub)){
-                        $queryhub = mysqli_query($koneksi, "INSERT INTO tbl_hubkel_res(id_karyawan,id_karyawan_rel,hubungan,waktudibuat,terakhirdiubah) SELECT id_karyawan,id_karyawan_rel,hubungan,waktudibuat,terakhirdiubah FROM tbl_hubkel WHERE id_karyawan = $idkaryawan");
-                        if($queryhub){
-                            $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_hubkel WHERE id_karyawan=$idkaryawan");
-                        }
+                        $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_hubkel WHERE id_karyawan=$idkaryawan");
+                        // $idrel = $tblhub['id_karyawan_rel'];
+                        // $queryhub = mysqli_query($koneksi, "INSERT INTO tbl_hubkel_res(id_karyawan,id_karyawan_rel,relnama,relbagian,hubungan,waktudibuat,terakhirdiubah) SELECT tbl_hubkel.id_karyawan,tbl_hubkel.id_karyawan_rel,tbl_infokaryawan.nama,tbl_masterkaryawan.bagian,tbl_hubkel.hubungan,tbl_hubkel.waktudibuat,tbl_hubkel.terakhirdiubah FROM tbl_hubkel, tbl_infokaryawan, tbl_masterkaryawan WHERE tbl_infokaryawan.id_karyawan = $idrel, tbl_masterkaryawan.id_karyawan = $idrel, tbl_hubkel.id_karyawan = $idkaryawan");
+                        // if($queryhub){
+                            
+                        // }
+                    }
+
+                    $searchhubrel = $koneksi -> query("SELECT * FROM tbl_hubkel WHERE tbl_hubkel.id_karyawan_rel='$idkaryawan'");
+                    $tblhubrel = $searchhub -> fetch_assoc();
+                    if(!empty($tblhubrel)){
+                        $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_hubkel WHERE id_karyawan_rel=$idkaryawan");
                     }
 
                     $searchsp = $koneksi -> query("SELECT * FROM tbl_sp WHERE tbl_sp.id_karyawan='$idkaryawan'");

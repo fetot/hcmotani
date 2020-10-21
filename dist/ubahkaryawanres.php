@@ -2,8 +2,8 @@
     include "uiheader.php";
     if(empty($_GET['id'])){
       $id = '1';
-      echo "<script>alert('Silahkan pilih Data Karyawan yang ingin diubah!')</script>";
-      echo "<script>location='datakaryawan'</script>";
+      echo "<script>alert('Silahkan pilih Data Karyawan Resign yang ingin diubah!')</script>";
+      echo "<script>location='dataresign'</script>";
     }else{
       $id = $_GET['id'];
     }
@@ -15,63 +15,51 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-                                  <li class='breadcrumb-item'><a href='datakaryawan'>Tampil Data Karyawan</a></li>
-                                  <li class='breadcrumb-item'><a href='detail?id=$id'>Info Karyawan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Ubah Data Karyawan</li>
+                                  <li class='breadcrumb-item'><a href='dataresign'>Tampil Data Resign</a></li>
+                                  <li class='breadcrumb-item'><a href='detailres?id=<?php echo $id; ?>'>Info Karyawan Resign</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ubah Data Karyawan Resign</li>
                             </ol>
                         </nav>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-user-edit mr-1"></i>
-                                Karyawan Harlep
+                                Karyawan Harlep (Sudah Resign)
                             </div>
                             <div class="card-body">
 
                             
                         <?php 
-                            $tampil = $koneksi -> query("SELECT * FROM tbl_masterkaryawan JOIN tbl_infokaryawan ON tbl_masterkaryawan.id_karyawan=tbl_infokaryawan.id_karyawan WHERE tbl_masterkaryawan.id_karyawan='$id'");
+                            $tampil = $koneksi -> query("SELECT * FROM tbl_infokaryawan_res WHERE tbl_infokaryawan_res.id_karyawan='$id'");
                             $tabel = $tampil -> fetch_assoc();
                         ?>
 
 
 <table class="table table-sm table-borderless p-2">
   <tbody style="font-size: 0.9rem">
-    <form method="post" action="ubahkaryawan?id=<?php echo $id; ?>" name="form1">
+    <form method="post" action="ubahkaryawanres?id=<?php echo $id; ?>" name="form1">
     <tr>
       <th scope="row">Nama Lengkap</th>
       <td>
-        <input type="text" id="inputNama" name="inputNama" class="form-control form-control-sm mb-1" value="<?php echo $tabel['nama']; ?>" placeholder="Nama Lengkap" required autofocus>
+        <input type="text" id="inputNama" name="inputNama" class="form-control form-control-sm mb-1" value="<?php echo $tabel['nama']; ?>" placeholder="Nama Lengkap" required autofocus disabled>
       </td>
     </tr>
     <tr>
       <th scope="row">Bagian</th>
       <td>
-        <input type="text" id="inputBagian" name="inputBagian" class="form-control form-control-sm mb-1" value="<?php echo $tabel['bagian']; ?>" placeholder="Bagian" required autofocus>
+        <input type="text" id="inputBagian" name="inputBagian" class="form-control form-control-sm mb-1" value="<?php echo $tabel['bagian']; ?>" placeholder="Bagian" required autofocus disabled>
       </td>
     </tr>
     <tr>
       <th scope="row">Badge</th>
       <td>
-        <input type="text" id="inputBadge" name="inputBadge" class="form-control form-control-sm mb-1" value="<?php echo $tabel['badge']; ?>" placeholder="Badge" required autofocus>
+        <input type="text" id="inputBadge" name="inputBadge" class="form-control form-control-sm mb-1" value="<?php echo $tabel['badge']; ?>" placeholder="Badge" required autofocus disabled>
       </td>
     </tr>
     <tr>
       <th scope="row">Tanggal Masuk Bekerja</th>
       <td>
-        <input type="date" id="inputTglMskKerja" name="inputTglMskKerja" class="form-control form-control-sm mb-1" value="<?php echo date("Y-m-d", strtotime($tabel['tgl_masukkerja'])); ?>" required>
+        <input type="date" id="inputTglMskKerja" name="inputTglMskKerja" class="form-control form-control-sm mb-1" value="<?php echo date("Y-m-d", strtotime($tabel['tgl_masukkerja'])); ?>" required disabled>
       </td>
-    </tr>
-    <tr>
-      <th scope="row">Status</th>
-      <td>
-        <select id="inputStatus" name="inputStatus" class="form-control form-control-sm mb-1" required autofocus>
-            <option value="Aktif" <?php if ($tabel['status'] == 'Aktif'){echo "selected";}; ?>>Aktif</option>
-            <option value="Cuti" <?php if ($tabel['status'] == 'Cuti'){echo "selected";}; ?>>Cuti</option>
-            <option value="Sakit" <?php if ($tabel['status'] == 'Sakit'){echo "selected";}; ?>>Sakit</option>
-            <option value="Permisi" <?php if ($tabel['status'] == 'Permisi'){echo "selected";}; ?>>Permisi</option>
-            <option value="Alpa" <?php if ($tabel['status'] == 'Alfa'){echo "selected";}; ?>>Alpa</option>
-        </select>  
-    </td>
     </tr>
     
     <tr>
@@ -154,7 +142,7 @@
         <th scope="row">
         </th>
         <td>
-          <a class="btn btn-outline-secondary mt-3" type="button" href="detail?id=<?php echo $id ?>">Batal</a>
+          <a class="btn btn-outline-secondary mt-3" type="button" href="detailres?id=<?php echo $id ?>">Batal</a>
           <button class="btn btn-primary mt-3 ml-2" type="button" data-toggle="modal" data-target="#modalKonfirmasi">Ubah</button>
         </td>
         <td></td>
@@ -187,10 +175,6 @@
 
 <?php
     if(isset($_POST['Submit'])){
-        $nama = $_POST['inputNama'];
-        $bagian = $_POST['inputBagian'];
-        $badge = $_POST['inputBadge'];
-        $tglmskkerja = $_POST['inputTglMskKerja'];
         $nik = $_POST['inputNIK'];
         $jeniskelamin = $_POST['jeniskelamin'];
         $ttl = $_POST['inputTtl'];
@@ -199,21 +183,13 @@
         $agama = $_POST['inputAgama'];
         $statusnikah = $_POST['statusnikah'];
         $pendidikan = $_POST['inputPendidikan'];
-        $status = $_POST['inputStatus'];
     
         include_once("koneksi.php");
     
-        $query1 = mysqli_query($koneksi, "UPDATE tbl_masterkaryawan SET tgl_masukkerja='$tglmskkerja',bagian='$bagian',badge='$badge',status='$status',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$id");
+        $query1 = mysqli_query($koneksi, "UPDATE tbl_infokaryawan_res SET jenis_kelamin='$jeniskelamin',ttl='$ttl',alamat='$alamat',agama='$agama',status_nikah='$statusnikah',no_hp='$nohp',pendidikan='$pendidikan',nik='$nik',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id_karyawan=$id");
         if ($query1) {
-            $query2 = mysqli_query($koneksi, "UPDATE tbl_infokaryawan SET id_karyawan='$id',nama='$nama',jenis_kelamin='$jeniskelamin',ttl='$ttl',alamat='$alamat',agama='$agama',status_nikah='$statusnikah',no_hp='$nohp',pendidikan='$pendidikan',nik='$nik',terakhirdiubah=CURRENT_TIMESTAMP() WHERE id=$id");
-        
-            if ($query2) {
-              echo "<script>alert('Data Karyawan berhasil diubah!')</script>";
-              echo "<script>location='detail?id=$id'</script>";
-                
-            } else {
-                var_dump($query2);
-            }
+              echo "<script>alert('Data Karyawan Resign berhasil diubah!')</script>";
+              echo "<script>location='detailres?id=$id'</script>";
         } else {
             var_dump($badge);
             var_dump($query1);echo "query1";

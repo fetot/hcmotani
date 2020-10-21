@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2020 at 01:51 PM
+-- Generation Time: Oct 20, 2020 at 07:00 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.33
 
@@ -44,7 +44,7 @@ CREATE TABLE `tbl_cuti` (
 INSERT INTO `tbl_cuti` (`no`, `id_karyawan`, `tgl_izincuti`, `tgl_akhircuti`, `alasan`, `waktudibuat`, `terakhirdiubah`) VALUES
 (1, 38, '2020-06-07', '2020-06-29', 'tabrakan dan bermasalah pada mata (lengkap surat dokter)', '2020-10-11 18:51:47', '2020-10-11 11:51:47'),
 (2, 132, '2020-10-11', '2020-10-12', 'Melahirkan', '2020-10-13 15:13:00', '2020-10-16 12:24:16'),
-(9, 140, '2020-10-21', '2020-12-22', 'Melahirkan', '2020-10-21 18:48:17', '2020-10-21 11:48:17');
+(3, 140, '2020-10-13', '2020-12-14', 'Melahirkan', '2020-10-13 21:11:28', '2020-10-19 07:48:12');
 
 -- --------------------------------------------------------
 
@@ -67,8 +67,7 @@ CREATE TABLE `tbl_cuti_res` (
 --
 
 INSERT INTO `tbl_cuti_res` (`no`, `id_karyawan`, `tgl_izincuti`, `tgl_akhircuti`, `alasan`, `waktudibuat`, `terakhirdiubah`) VALUES
-(1, 282, '2020-10-19', '2020-10-20', 'ngetes saja', '2020-10-19 22:33:54', '2020-10-19 15:33:54'),
-(2, 289, '2020-10-19', '2020-10-20', 'sakit perut', '2020-10-21 18:23:00', '2020-10-21 11:23:00');
+(1, 282, '2020-10-19', '2020-10-20', 'ngetes saja', '2020-10-19 22:33:54', '2020-10-19 15:33:54');
 
 -- --------------------------------------------------------
 
@@ -91,7 +90,9 @@ CREATE TABLE `tbl_hubkel` (
 
 INSERT INTO `tbl_hubkel` (`id`, `id_karyawan`, `id_karyawan_rel`, `hubungan`, `waktudibuat`, `terakhirdiubah`) VALUES
 (1, 1, 2, 'Saudara', '2020-10-13 16:56:21', '2020-10-13 09:56:21'),
-(2, 276, 232, 'Saudara', '2020-10-16 18:36:24', '2020-10-16 11:36:24');
+(2, 276, 232, 'Saudara', '2020-10-16 18:36:24', '2020-10-16 11:36:24'),
+(4, 6, 160, 'Abang Adik', '2020-10-16 18:40:26', '2020-10-16 11:40:26'),
+(5, 2, 119, 'Sepupu', '2020-10-19 15:04:15', '2020-10-19 11:16:05');
 
 -- --------------------------------------------------------
 
@@ -443,18 +444,16 @@ CREATE TABLE `tbl_infokaryawan_res` (
   `no_hp` varchar(14) NOT NULL,
   `pendidikan` varchar(100) NOT NULL,
   `nik` varchar(20) NOT NULL,
-  `waktudibuat` timestamp NOT NULL DEFAULT current_timestamp(),
-  `terakhirdiubah` timestamp NOT NULL DEFAULT current_timestamp()
+  `waktudibuat` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_infokaryawan_res`
 --
 
-INSERT INTO `tbl_infokaryawan_res` (`id_karyawan`, `nama`, `bagian`, `badge`, `tgl_masukkerja`, `jenis_kelamin`, `ttl`, `alamat`, `agama`, `status_nikah`, `no_hp`, `pendidikan`, `nik`, `waktudibuat`, `terakhirdiubah`) VALUES
-(282, 'Santa Eria M. Silitonga', 'CL - III', '999', '2020-10-19', 'Wanita', 'Medan, 19 Oktober 1985', 'Jonggol', 'Kristen', 'Lajang', '081212121212', 'SMA PAB 1', '654564567', '2020-10-19 14:41:54', '2020-10-21 09:29:00'),
-(283, 'Siti Rahma', 'Sablon', '998', '2020-10-19', 'Wanita', 'Medan 19 Oktober 1985', 'Mabar', 'Islam', 'Menikah', '081212121212', 'SMA', '', '2020-10-19 16:44:18', '2020-10-20 18:21:59'),
-(289, 'Muhamad Yusuf', 'Bengkel', '997', '2020-06-17', 'Pria', 'Medan, 21 Oktober 1985', 'Medan', 'Islam', 'Lajang', '0812121212', 'SMA', '', '2020-10-21 11:18:48', '2020-10-21 11:18:48');
+INSERT INTO `tbl_infokaryawan_res` (`id_karyawan`, `nama`, `bagian`, `badge`, `tgl_masukkerja`, `jenis_kelamin`, `ttl`, `alamat`, `agama`, `status_nikah`, `no_hp`, `pendidikan`, `nik`, `waktudibuat`) VALUES
+(282, 'Santa Eria M. Silitonga', 'CL - III', '999', '2020-10-19', 'Wanita', 'Medan, 19 Oktober 1985', 'Jonggol', 'Kristen', 'Lajang', '081212121212', 'SMA PAB 1', '', '2020-10-19 14:41:54'),
+(283, 'Siti Rahma', 'Sablon', '998', '2020-10-19', 'Wanita', 'Medan 19 Oktober 1985', 'Mabar', 'Islam', 'Menikah', '081212121212', 'SMA', '', '2020-10-19 16:44:18');
 
 -- --------------------------------------------------------
 
@@ -514,7 +513,7 @@ INSERT INTO `tbl_masterkaryawan` (`id_karyawan`, `tgl_masukkerja`, `bagian`, `ba
 (35, '2017-03-16', 'Clean', '307', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (36, '2007-11-27', 'Clean', '124', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (37, '0000-00-00', 'Clean', '', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
-(38, '2015-10-26', 'CL - III', '143', 'Aktif', '2020-10-13 13:46:26', '2020-10-20 17:59:28'),
+(38, '2015-10-26', 'CL - III', '143', 'Aktif', '2020-10-13 13:46:26', '2020-10-14 13:23:42'),
 (39, '2017-07-12', 'CL - III', '44', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (40, '2017-04-05', 'CL - III', '053', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (41, '2017-02-10', 'CL - III', '299', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
@@ -608,7 +607,7 @@ INSERT INTO `tbl_masterkaryawan` (`id_karyawan`, `tgl_masukkerja`, `bagian`, `ba
 (129, '2019-06-27', 'Gudang', '154', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (130, '2007-06-04', 'Gudang', '130', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (131, '2008-05-12', 'Gudang', '170', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
-(132, '2016-08-08', 'HD - Pot', '289', 'Aktif', '2020-10-13 13:46:26', '2020-10-20 17:59:28'),
+(132, '2016-08-08', 'HD - Pot', '289', 'Aktif', '2020-10-13 13:46:26', '2020-10-14 13:23:42'),
 (133, '2018-07-23', 'HD - Pot', '263', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (134, '2010-10-13', 'HD - Pot', '068', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (135, '2019-03-02', 'HD - Pot', '269', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
@@ -616,7 +615,7 @@ INSERT INTO `tbl_masterkaryawan` (`id_karyawan`, `tgl_masukkerja`, `bagian`, `ba
 (137, '2009-11-29', 'HD - Pot', '187', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (138, '2009-11-29', 'HD - Pot', '186', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (139, '2012-10-25', 'HD - Pot', '142', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
-(140, '2008-06-09', 'HD - Pot', '243', 'Cuti', '2020-10-13 13:46:26', '2020-10-21 11:48:17'),
+(140, '2008-06-09', 'HD - Pot', '243', 'Cuti', '2020-10-13 13:46:26', '2020-10-13 14:11:28'),
 (141, '2008-10-11', 'HD - Pot', '008', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (142, '2018-02-09', 'HD - Pot', '031', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
 (143, '2011-01-07', 'HD - Pot', '182', 'Aktif', '2020-10-13 13:46:26', '2020-10-13 06:46:26'),
@@ -775,9 +774,8 @@ CREATE TABLE `tbl_resign` (
 --
 
 INSERT INTO `tbl_resign` (`no`, `id_karyawan`, `tgl_resign`, `alasan`, `waktudibuat`, `terakhirdiubah`) VALUES
-(1, 282, '2020-04-03', 'Karena ingin program hamil', '2020-10-19 21:56:45', '2020-10-21 09:31:26'),
-(7, 283, '2020-05-06', 'Ikut Suami pindah ke Aceh', '2020-10-20 19:58:47', '2020-10-20 12:58:47'),
-(8, 289, '2020-06-17', 'sudah memiliki pekerjaan baru', '2020-10-21 18:33:52', '2020-10-21 11:33:52');
+(1, 282, '2020-04-03', 'Karena ingin program hamil', '2020-10-19 21:56:45', '2020-10-19 14:56:45'),
+(7, 283, '2020-05-06', 'Ikut Suami pindah ke Aceh', '2020-10-20 19:58:47', '2020-10-20 12:58:47');
 
 -- --------------------------------------------------------
 
@@ -800,12 +798,10 @@ CREATE TABLE `tbl_sp` (
 --
 
 INSERT INTO `tbl_sp` (`no`, `id_karyawan`, `tgl_sp`, `jenissp`, `keterangan`, `waktudibuat`, `terakhirdiubah`) VALUES
-(19, 116, '2020-04-02', 'III', 'merokok di area lokasi kerja terlihat oleh Pimpinan Otani', '2020-10-21 11:48:43', '2020-10-21 04:48:43'),
-(24, 87, '2020-04-03', 'III', 'merokok di area lokasi kerja terlihat oleh Pimpinan Otani', '2020-10-21 12:02:36', '2020-10-21 05:02:36'),
-(25, 26, '2020-04-13', 'I', 'kelalaian kerja', '2020-10-21 12:03:21', '2020-10-21 05:03:21'),
-(26, 112, '2020-07-14', 'I', 'kelalaian kerja karena kurang memahami informasi yang diterima', '2020-10-21 12:04:22', '2020-10-21 05:04:22'),
-(27, 115, '2020-07-14', 'I', 'kelalaian kerja karena kurang memahami informasi yang diterima', '2020-10-21 12:04:53', '2020-10-21 05:04:53'),
-(28, 263, '2020-07-14', 'I', 'mencetak bahan terlalu banyak dari yang ditentukan', '2020-10-21 12:05:36', '2020-10-21 05:05:36');
+(5, 115, '2020-07-14', 'I', 'kelalaian kerja karena kurang memahami informasi yang diterima', '2020-10-03 23:37:37', '2020-10-03 16:37:37'),
+(6, 263, '2020-07-14', 'I', 'mencetak bahan terlalu banyak dari yang ditentukan', '2020-10-03 23:41:25', '2020-10-03 16:41:25'),
+(9, 116, '2020-04-02', 'III', 'merokok di area lokasi kerja terlihat oleh Pimpinan Otani', '2020-10-05 16:24:28', '2020-10-19 08:02:26'),
+(15, 115, '2020-10-19', 'II', 'ngetes', '2020-10-19 21:37:56', '2020-10-19 14:37:56');
 
 -- --------------------------------------------------------
 
@@ -828,8 +824,7 @@ CREATE TABLE `tbl_sp_res` (
 --
 
 INSERT INTO `tbl_sp_res` (`no`, `id_karyawan`, `tgl_sp`, `jenissp`, `keterangan`, `waktudibuat`, `terakhirdiubah`) VALUES
-(1, 282, '2020-10-19', 'I', 'ngetes', '2020-10-19 22:32:43', '2020-10-19 15:32:43'),
-(2, 289, '2020-10-21', 'II', 'tes lagi', '2020-10-21 18:22:14', '2020-10-21 11:22:14');
+(1, 282, '2020-10-19', 'I', 'ngetes', '2020-10-19 22:32:43', '2020-10-19 15:32:43');
 
 -- --------------------------------------------------------
 
@@ -931,19 +926,19 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_cuti`
 --
 ALTER TABLE `tbl_cuti`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_cuti_res`
 --
 ALTER TABLE `tbl_cuti_res`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_hubkel`
 --
 ALTER TABLE `tbl_hubkel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_hubkel_res`
@@ -955,31 +950,31 @@ ALTER TABLE `tbl_hubkel_res`
 -- AUTO_INCREMENT for table `tbl_infokaryawan`
 --
 ALTER TABLE `tbl_infokaryawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
 -- AUTO_INCREMENT for table `tbl_masterkaryawan`
 --
 ALTER TABLE `tbl_masterkaryawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
 -- AUTO_INCREMENT for table `tbl_resign`
 --
 ALTER TABLE `tbl_resign`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_sp`
 --
 ALTER TABLE `tbl_sp`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_sp_res`
 --
 ALTER TABLE `tbl_sp_res`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

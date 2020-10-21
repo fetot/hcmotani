@@ -1,5 +1,8 @@
 <?php 
 include "uiheader.php";
+if(!empty($_GET['id'])){
+    $id = $_GET['id'];
+}
 ?>
 
 <main>
@@ -18,7 +21,6 @@ include "uiheader.php";
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
                 <li class="breadcrumb-item">
                     <a href="index">Dashboard</a>
                 </li>
@@ -111,45 +113,12 @@ include "uiheader.php";
                                                 class="dropdown-item text-primary"
                                                 href="ubahresign?id=<?php echo $tabel['no']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                                            <button
-                                                class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Resign</button>
+                                            <form method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan. SEMUA data yang menyangkut karyawan ini juga akan ikut terhapus!');" name="formhapus" id="formhapus" action="dataresign?id=<?php echo $tabel['no']; ?>">
+                                                <button type="submit" name="Hapus" id="btnTambah" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw
+                                                mr-1"></i>Hapus</button>
+                                            </form>
                                         </div>
                                     </div>
-
-                                    <!-- modal delete -->
-                                    <div
-                                        class="modal fade"
-                                        id="modalDelKonfirmasi"
-                                        tabindex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                                                    dikembalikan. <br>Menghapus data resign tidak mengembalikan data karyawan kedalam data karyawan yang aktif.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a
-                                                        href="hapusresign?id=<?php echo $tabel['no']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end modal -->
-
                                 </td>
                             </tr>
                             <?php $nomor++; ?>
@@ -161,5 +130,29 @@ include "uiheader.php";
         </div>
     </div>
 </main>
+
+<?php
+                                        if(isset($_POST['Hapus'])){
+                                            include_once("koneksi.php");
+                                            
+                                            $resign = $koneksi -> query("SELECT * FROM tbl_resign WHERE no=$id");
+                                            $tbl = $resign -> fetch_assoc();
+                                            $idkar = $tbl['id_karyawan'];
+                                            if(!empty($idkar)){
+                                                $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_resign WHERE no=$id");
+                                                $hapuskaryawan = mysqli_query($koneksi, "DELETE FROM tbl_infokaryawan_res WHERE id_karyawan=$idkar");
+                                                $hapuscuti = mysqli_query($koneksi, "DELETE FROM tbl_cuti_res WHERE id_karyawan=$idkar");
+                                                $hapussp = mysqli_query($koneksi, "DELETE FROM tbl_sp_res WHERE id_karyawan=$idkar");
+                                                $hapushubkelres = mysqli_query($koneksi, "DELETE FROM tbl_hubkel_res WHERE id_karyawan=$idkar OR id_karyawan_rel=$idkar");
+                                                if($queryhapus){
+                                                echo "<script>alert('Data Resign berhasil dihapus!')</script>";
+                                                echo "<script>location='dataresign'</script>";
+                                                    } else {
+                                                        var_dump($queryhapus);echo "query1";
+                                            }
+                                            }
+                                    
+                                        }
+                                    ?>
 
 <?php include "footer.php"; ?>

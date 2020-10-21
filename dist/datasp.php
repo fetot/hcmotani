@@ -1,5 +1,8 @@
 <?php 
 include "uiheader.php";
+if(!empty($_GET['id'])){
+    $id = $_GET['id'];
+}
 ?>
 
 <main>
@@ -18,7 +21,6 @@ include "uiheader.php";
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <!-- <li class="breadcrumb-item active" aria-current="page">Dashboard</li> -->
                 <li class="breadcrumb-item">
                     <a href="index">Dashboard</a>
                 </li>
@@ -129,44 +131,13 @@ include "uiheader.php";
                                                 class="dropdown-item text-primary"
                                                 href="ubahsp?id=<?php echo $tabel['no']; ?>">
                                                 <i class="fas fa-edit fa-fw mr-1"></i>Ubah Data</a>
-                                            <button
-                                                class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus SP</button>
-                                        </div>
-                                    </div>
 
-                                    <!-- modal delete -->
-                                    <div
-                                        class="modal fade"
-                                        id="modalDelKonfirmasi"
-                                        tabindex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                                                    dikembalikan.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a
-                                                        href="hapussp?id=<?php echo $tabel['no']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </div>
+                                            <form method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan.');" name="formhapus" id="formhapus" action="datasp?id=<?php echo $tabel['no']; ?>">
+                                            <button type="submit" name="Hapus" id="btnTambah" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw
+                                            mr-1"></i>Hapus SP</button>
+                                            </form>
                                         </div>
                                     </div>
-                                    <!-- end modal -->
 
                                 </td>
                             </tr>
@@ -179,5 +150,19 @@ include "uiheader.php";
         </div>
     </div>
 </main>
+
+<?php
+                                        if(isset($_POST['Hapus'])){
+                                        include_once("koneksi.php");
+
+                                        $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_sp WHERE no=$id");
+                                            if($queryhapus){
+                                            echo "<script>alert('SP berhasil dihapus!')</script>";
+                                            echo "<script>location='datasp'</script>";
+                                            } else {
+                                                var_dump($queryhapus);echo "query1";
+                                        }
+                                        }
+                                    ?>
 
 <?php include "footer.php"; ?>

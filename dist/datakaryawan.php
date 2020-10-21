@@ -1,5 +1,8 @@
 <?php 
     include "uiheader.php";
+    if(!empty($_GET['id'])){
+        $id = $_GET['id'];
+    }
 ?>
 
 <main>
@@ -149,44 +152,13 @@
                                                 href="tambahresign?inputID=<?php echo $tabel['id_karyawan']; ?>&Cari="
                                                 class="dropdown-item text-danger">
                                                 <i class="fas fa-exclamation-triangle fa-fw mr-1"></i>Resign</a>
-                                            <button
-                                                class="dropdown-item text-danger"
-                                                data-toggle="modal"
-                                                data-target="#modalDelKonfirmasi">
-                                                <i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</button>
+                                            <form method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan. SEMUA data yang menyangkut karyawan ini juga akan ikut terhapus!');" name="formhapus" id="formhapus" action="datakaryawan?id=<?php echo $tabel['id_karyawan']; ?>">
+                                            <button type="submit" name="Hapus" id="btnTambah" class="dropdown-item text-danger"><i class="fas fa-trash-alt fa-fw mr-1"></i>Hapus Karyawan</a></button>
+                                            </form>
                                         </div>
                                     </div>
 
-                                    <!-- modal delete -->
-                                    <div
-                                        class="modal fade"
-                                        id="modalDelKonfirmasi"
-                                        tabindex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                        <i class="fas fa-exclamation-circle fa-fw mr-1 text-danger"></i>Konfirmasi</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat
-                                                    dikembalikan.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a
-                                                        href="hapuskaryawan?id=<?php echo $tabel['id_karyawan']; ?>"
-                                                        class="btn btn-danger">Hapus</a>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end modal -->
+                                    
                                 </td>
                             </tr>
                             <?php } ?>
@@ -197,6 +169,31 @@
         </div>
     </div>
 </main>
+
+<?php
+                                        if(isset($_POST['Hapus'])){
+                                        include_once("koneksi.php");
+
+                                        $queryhapus = mysqli_query($koneksi, "DELETE FROM tbl_masterkaryawan WHERE id_karyawan=$id");
+                                        if($queryhapus){
+                                            $queryhapus2 = mysqli_query($koneksi, "DELETE FROM tbl_infokaryawan WHERE id=$id");
+
+                                            if ($queryhapus2) {
+                                                $hapuscuti = mysqli_query($koneksi, "DELETE FROM tbl_cuti WHERE id_karyawan=$id");
+                                                $hapussp = mysqli_query($koneksi, "DELETE FROM tbl_sp WHERE id_karyawan=$id");
+                                                $hapushubkel = mysqli_query($koneksi, "DELETE FROM tbl_hubkel WHERE id_karyawan=$idk OR id_karyawan_rel=$id");
+
+                                            echo "<script>alert('Data Karyawan berhasil dihapus!')</script>";
+                                            echo "<script>location='datakaryawan'</script>";
+                                            
+                                            } else {
+                                                var_dump($queryhapus2);
+                                            }
+                                        } else {
+                                            var_dump($queryhapus);echo "query1";
+                                        }
+                                        }
+                                    ?>
 
 <?php 
     include "footer.php";
